@@ -6,6 +6,7 @@ import {
   FaMapMarkerAlt,
 } from "react-icons/fa";
 import Link from "next/link";
+import Navbar from "../components/Navbar";
 
 // Data produk contoh dengan kategori umum dan harga Rupiah
 const products = [
@@ -119,37 +120,7 @@ export default function ProductsPage() {
       </Head>
 
       {/* Navbar */}
-      <nav className="sticky top-0 z-50 bg-white pb-4 shadow-md">
-        <div className="bg-slate-200">
-          <div className="container mx-auto flex items-center justify-end py-1 text-sm gap-5 text-slate-600">
-            <a>Tentang</a>
-            <a>Buka Toko</a>
-          </div>
-        </div>
-        <div className="container mx-auto flex flex-col md:flex-row items-center justify-between pt-4">
-          <div className="flex w-full md:w-auto items-center justify-between md:space-x-8">
-            <Link href="/products">
-              <h1 className="text-2xl font-bold text-[#698ABD]">DexShop</h1>
-            </Link>
-            <div className="md:hidden">
-              <FaShoppingCart className="text-2xl text-gray-600" />
-            </div>
-          </div>
-
-          <div className="w-full md:w-1/2 mt-2 md:mt-0 flex items-center bg-white rounded-full px-4 py-2 ring-1 ring-slate-600 focus-within:ring-2 focus-within:ring-[#A8C4E8] text-slate-600">
-            <FaSearch className=" mr-2" />
-            <input
-              type="text"
-              placeholder="Cari produk atau toko..."
-              className="w-full bg-white focus:outline-none"
-            />
-          </div>
-
-          <div className="hidden md:flex items-center space-x-4">
-            <FaShoppingCart className="text-2xl text-slate-600 cursor-pointer hover:text-[#698ABD] transition" />
-          </div>
-        </div>
-      </nav>
+      <Navbar />
 
       {/* Product Grid */}
       <main className="container mx-auto p-4 md:p-8">
