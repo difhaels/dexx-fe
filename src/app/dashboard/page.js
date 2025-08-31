@@ -10,6 +10,7 @@ import {
   FaChartBar,
 } from "react-icons/fa";
 import Link from "next/link";
+import Sidebar from "../components/Sidebar";
 
 // Data statis untuk contoh tampilan
 const dashboardData = {
@@ -32,60 +33,7 @@ export default function SellerDashboard() {
       </Head>
 
       {/* Sidebar */}
-      <aside className="w-64 bg-gray-800 text-white p-6 min-h-screen">
-        <h2 className="text-3xl font-bold mb-8 text-green-400">
-          Seller Dashboard
-        </h2>
-        <nav>
-          <ul>
-            <li className="mb-4">
-              <Link href="#">
-                <span
-                  className={`flex items-center p-3 rounded-lg transition-colors ${
-                    activeTab === "home"
-                      ? "bg-gray-700 text-white"
-                      : "text-gray-400 hover:bg-gray-700"
-                  }`}
-                  onClick={() => setActiveTab("home")}
-                >
-                  <FaHome className="mr-3 text-lg" />
-                  <span className="font-semibold">Home</span>
-                </span>
-              </Link>
-            </li>
-            <li className="mb-4">
-              <Link href="#">
-                <span
-                  className={`flex items-center p-3 rounded-lg transition-colors ${
-                    activeTab === "orders"
-                      ? "bg-gray-700 text-white"
-                      : "text-gray-400 hover:bg-gray-700"
-                  }`}
-                  onClick={() => setActiveTab("orders")}
-                >
-                  <FaShoppingBag className="mr-3 text-lg" />
-                  <span className="font-semibold">Orders</span>
-                </span>
-              </Link>
-            </li>
-            <li className="mb-4">
-              <Link href="#">
-                <span
-                  className={`flex items-center p-3 rounded-lg transition-colors ${
-                    activeTab === "products"
-                      ? "bg-gray-700 text-white"
-                      : "text-gray-400 hover:bg-gray-700"
-                  }`}
-                  onClick={() => setActiveTab("products")}
-                >
-                  <FaBox className="mr-3 text-lg" />
-                  <span className="font-semibold">Products</span>
-                </span>
-              </Link>
-            </li>
-          </ul>
-        </nav>
-      </aside>
+     <Sidebar x="home"/>
 
       {/* Main Content */}
       <main className="flex-1 p-8">
