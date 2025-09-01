@@ -1,173 +1,390 @@
+"use client";
 import Head from "next/head";
+import { useState } from "react";
 import {
-  FaShoppingCart,
-  FaSearch,
+  FaHome,
+  FaBox,
+  FaShoppingBag,
+  FaPlus,
+  FaEdit,
+  FaTrash,
+  FaEyeSlash,
+  FaFileUpload,
+  FaDollarSign,
+  FaTag,
+  FaInfoCircle,
   FaStar,
-  FaMapMarkerAlt,
 } from "react-icons/fa";
 import Link from "next/link";
-import Navbar from "../components/Navbar";
+import Sidebar from "../components/Sidebar";
 
-// Data produk contoh dengan kategori umum dan harga Rupiah
-const products = [
+const formatRupiah = (number) => {
+  return new Intl.NumberFormat("id-ID", {
+    style: "currency",
+    currency: "IDR",
+    minimumFractionDigits: 0,
+  }).format(number);
+};
+
+// Data produk contoh
+const initialProducts = [
   {
     id: 1,
-    name: "Laptop Gaming ROG Strix",
-    price: "Rp 25.000.000",
-    city: "Jakarta",
-    rating: 4.8,
-    sellerRating: 4.9,
     image:
       "https://images.tokopedia.net/img/cache/700/VqbcmM/2023/11/14/0d03708a-6b8a-40a2-aa7c-8e3b56360812.png",
+    name: "Laptop Gaming ROG Strix",
+    price: 25000000,
+    stock: 10,
+    status: "Active",
   },
   {
     id: 2,
-    name: "Air Fryer Multifungsi",
-    price: "Rp 850.000",
-    city: "Bandung",
-    rating: 4.5,
-    sellerRating: 4.7,
     image:
       "https://images.tokopedia.net/img/cache/700/VqbcmM/2023/10/25/74149629-68d1-4228-a400-08d27ffc2e3d.png",
+    name: "Air Fryer Multifungsi",
+    price: 850000,
+    stock: 0,
+    status: "Out of Stock",
   },
   {
     id: 3,
-    name: "Kemeja Katun Pria",
-    price: "Rp 120.000",
-    city: "Surabaya",
-    rating: 5.0,
-    sellerRating: 5.0,
     image:
       "https://images.tokopedia.net/img/cache/700/VqbcmM/2022/10/26/663c78cf-487c-471a-b0d5-b043f11e9f1a.jpg",
+    name: "Kemeja Katun Pria",
+    price: 120000,
+    stock: 50,
+    status: "Active",
   },
   {
     id: 4,
-    name: "Buku Resep Masakan Nusantara",
-    price: "Rp 65.000",
-    city: "Yogyakarta",
-    rating: 4.6,
-    sellerRating: 4.8,
     image:
       "https://images.tokopedia.net/img/cache/700/VqbcmM/2023/1/18/d8a39c59-b9d9-43c3-b034-7756f7e44a04.jpg",
-  },
-  {
-    id: 5,
-    name: "Set Alat Makan Kayu",
-    price: "Rp 45.000",
-    city: "Bekasi",
-    rating: 4.9,
-    sellerRating: 4.9,
-    image:
-      "https://images.tokopedia.net/img/cache/700/VqbcmM/2023/1/13/a207212f-653a-48d6-953a-b851acb93b58.jpg",
-  },
-  {
-    id: 6,
-    name: "Sepatu Lari Sport",
-    price: "Rp 450.000",
-    city: "Malang",
-    rating: 4.7,
-    sellerRating: 4.6,
-    image:
-      "https://images.tokopedia.net/img/cache/700/VqbcmM/2023/9/22/a9a4c0ac-9f24-42f7-873b-e85d46114849.jpg",
-  },
-  {
-    id: 7,
-    name: "Headset Gaming",
-    price: "Rp 650.000",
-    city: "Jakarta",
-    rating: 4.8,
-    sellerRating: 4.9,
-    image:
-      "https://images.tokopedia.net/img/cache/700/VqbcmM/2023/11/15/21f061e8-71e8-466d-ad02-e25f69042b36.jpg",
-  },
-  {
-    id: 8,
-    name: "Rak Dinding Minimalis",
-    price: "Rp 95.000",
-    city: "Bandung",
-    rating: 4.5,
-    sellerRating: 4.7,
-    image:
-      "https://images.tokopedia.net/img/cache/700/VqbcmM/2023/12/11/6e33f373-c159-4d83-9b19-f55a104033b0.jpg",
-  },
-  {
-    id: 9,
-    name: "Beras Premium 5kg",
-    price: "Rp 72.000",
-    city: "Surabaya",
-    rating: 5.0,
-    sellerRating: 5.0,
-    image:
-      "https://images.tokopedia.net/img/cache/700/VqbcmM/2023/5/17/74169733-128a-41d6-8488-82627e909a15.jpg",
-  },
-  {
-    id: 10,
-    name: "Set Panci Anti Lengket",
-    price: "Rp 350.000",
-    city: "Yogyakarta",
-    rating: 4.6,
-    sellerRating: 4.8,
-    image:
-      "https://images.tokopedia.net/img/cache/700/VqbcmM/2023/10/25/1109a93c-2c96-419b-b0b9-52643a13ae87.jpg",
+    name: "Buku Resep Masakan",
+    price: 65000,
+    stock: 25,
+    status: "Archived",
   },
 ];
 
-export default function ProductsPage() {
+export default function SellerProducts() {
+  const [activeSidebarTab] = useState("products");
+  const [view, setView] = useState("list"); // 'list', 'add', 'edit'
+  const [products, setProducts] = useState(initialProducts);
+  const [currentProduct, setCurrentProduct] = useState(null);
+
+  const handleEditClick = (product) => {
+    setCurrentProduct(product);
+    setView("edit");
+  };
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    // Logika untuk menyimpan data produk
+    console.log("Produk berhasil disimpan:", currentProduct);
+    setView("list");
+  };
+
+  const handleDelete = (id) => {
+    if (window.confirm("Apakah Anda yakin ingin menghapus produk ini?")) {
+      setProducts(products.filter((p) => p.id !== id));
+      console.log(`Produk dengan ID ${id} berhasil dihapus.`);
+    }
+  };
+
+  const handleToggleStatus = (id) => {
+    setProducts(
+      products.map((p) =>
+        p.id === id
+          ? {
+              ...p,
+              status: p.status === "Active" ? "Archived" : "Active",
+            }
+          : p
+      )
+    );
+  };
+
+  const getStatusClasses = (status) => {
+    switch (status) {
+      case "Active":
+        return "bg-green-200 text-green-800";
+      case "Out of Stock":
+        return "bg-yellow-200 text-yellow-800";
+      case "Archived":
+        return "bg-red-200 text-red-800";
+      default:
+        return "";
+    }
+  };
+
   return (
-    <div className="bg-gray-100 min-h-screen">
+    <div className="flex min-h-screen bg-gray-100">
       <Head>
-        <title>Products</title>
+        <title>Products | Seller Dashboard</title>
       </Head>
 
-      {/* Navbar */}
-      <Navbar />
-
-      {/* Product Grid */}
-      <main className="container mx-auto p-4 md:p-8">
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-4 md:gap-6">
-          {products.map((product) => (
-            <div
-              key={product.id}
-              className="bg-white rounded-lg shadow-md overflow-hidden transition-transform hover:scale-105 cursor-pointer"
-            >
-              <img
-                src={product.image}
-                alt={product.name}
-                className="w-full h-40 object-cover"
-              />
-              <div className="p-3 md:p-4">
-                <h3 className="text-sm md:text-base font-semibold text-gray-900 mb-1 truncate">
-                  {product.name}
-                </h3>
-                <p className="text-md md:text-lg font-bold text-indigo-600 mb-2">
-                  {product.price}
-                </p>
-                <div className="flex items-center text-xs md:text-sm text-gray-500 mb-1">
-                  <FaMapMarkerAlt className="mr-1" />
-                  <span>{product.city}</span>
-                </div>
-                <div className="flex items-center justify-between text-xs md:text-sm">
-                  <div className="flex items-center text-yellow-500">
-                    <FaStar className="mr-1" />
-                    <span>{product.rating}</span>
-                  </div>
-                  <div className="text-gray-500">
-                    <span className="ml-1 font-semibold">
-                      {product.sellerRating}
-                    </span>
-                    <span className="text-xs">/5 Penjual</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
+      {/* Sidebar */}
+      <Sidebar x="products" />
+      {/* Main Content */}
+      <main className="flex-1 p-8">
+        <div className="flex justify-between items-center mb-8">
+          <h1 className="text-4xl font-extrabold text-gray-900">Products</h1>
+          <button
+            onClick={() => setView("add")}
+            className="flex items-center space-x-2 px-6 py-3 bg-indigo-600 text-white rounded-lg font-semibold transition-colors hover:bg-indigo-700"
+          >
+            <FaPlus />
+            <span>Tambah Produk Baru</span>
+          </button>
         </div>
-      </main>
 
-      {/* Footer */}
-      <footer className="text-center p-4 bg-gray-800 text-gray-400 mt-8">
-        &copy; 2025 Marketplace. All Rights Reserved.
-      </footer>
+        {/* Daftar Produk */}
+        {view === "list" && (
+          <div>
+            <h2 className="text-2xl font-bold text-gray-800 mb-4">
+              Daftar Produk
+            </h2>
+            <div className="bg-white rounded-lg shadow-sm overflow-hidden">
+              <table className="min-w-full divide-y divide-gray-200">
+                <thead className="bg-gray-50">
+                  <tr>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                      Produk
+                    </th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                      Harga
+                    </th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                      Stok
+                    </th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                      Status
+                    </th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                      Aksi
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="bg-white divide-y divide-gray-200">
+                  {products.map((product) => (
+                    <tr key={product.id}>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="flex items-center">
+                          <img
+                            className="h-10 w-10 rounded-full"
+                            src={product.image}
+                            alt={product.name}
+                          />
+                          <div className="ml-4">
+                            <div className="text-sm font-medium text-gray-900">
+                              {product.name}
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        {formatRupiah(product.price)}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        {product.stock}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <span
+                          className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusClasses(
+                            product.status
+                          )}`}
+                        >
+                          {product.status}
+                        </span>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                        <div className="flex space-x-4">
+                          <button
+                            onClick={() => handleEditClick(product)}
+                            className="text-indigo-600 hover:text-indigo-900"
+                          >
+                            <FaEdit />
+                          </button>
+                          <button
+                            onClick={() => handleDelete(product.id)}
+                            className="text-red-600 hover:text-red-900"
+                          >
+                            <FaTrash />
+                          </button>
+                          <button
+                            onClick={() => handleToggleStatus(product.id)}
+                            className="text-gray-500 hover:text-gray-700"
+                          >
+                            <FaEyeSlash />
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        )}
+
+        {/* Form Tambah Produk Baru */}
+        {view === "add" && (
+          <div>
+            <h2 className="text-2xl font-bold text-gray-800 mb-4">
+              Tambah Produk Baru
+            </h2>
+            <form
+              onSubmit={handleFormSubmit}
+              className="bg-white rounded-lg shadow-sm p-6 space-y-6"
+            >
+              <div>
+                <label
+                  htmlFor="name"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Nama Produk
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                />
+              </div>
+              <div>
+                <label
+                  htmlFor="price"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Harga
+                </label>
+                <input
+                  type="number"
+                  id="price"
+                  name="price"
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                />
+              </div>
+              <div>
+                <label
+                  htmlFor="stock"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Stok
+                </label>
+                <input
+                  type="number"
+                  id="stock"
+                  name="stock"
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                />
+              </div>
+              <div>
+                <label
+                  htmlFor="image"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  URL Gambar
+                </label>
+                <input
+                  type="url"
+                  id="image"
+                  name="image"
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                />
+              </div>
+              <div className="flex justify-end space-x-4">
+                <button
+                  type="button"
+                  onClick={() => setView("list")}
+                  className="px-4 py-2 text-sm font-medium text-gray-700 rounded-md border border-gray-300 hover:bg-gray-50"
+                >
+                  Batal
+                </button>
+                <button
+                  type="submit"
+                  className="px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded-md hover:bg-indigo-700"
+                >
+                  Simpan Produk
+                </button>
+              </div>
+            </form>
+          </div>
+        )}
+
+        {/* Form Edit Produk */}
+        {view === "edit" && (
+          <div>
+            <h2 className="text-2xl font-bold text-gray-800 mb-4">
+              Edit Produk
+            </h2>
+            <form
+              onSubmit={handleFormSubmit}
+              className="bg-white rounded-lg shadow-sm p-6 space-y-6"
+            >
+              {/* Form ini akan diisi dengan data dari `currentProduct` */}
+              <div>
+                <label
+                  htmlFor="edit-name"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Nama Produk
+                </label>
+                <input
+                  type="text"
+                  id="edit-name"
+                  name="name"
+                  value={currentProduct.name}
+                  onChange={(e) =>
+                    setCurrentProduct({
+                      ...currentProduct,
+                      name: e.target.value,
+                    })
+                  }
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
+                />
+              </div>
+              <div>
+                <label
+                  htmlFor="edit-price"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Harga
+                </label>
+                <input
+                  type="number"
+                  id="edit-price"
+                  name="price"
+                  value={currentProduct.price}
+                  onChange={(e) =>
+                    setCurrentProduct({
+                      ...currentProduct,
+                      price: e.target.value,
+                    })
+                  }
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
+                />
+              </div>
+              {/* dan seterusnya untuk field lainnya */}
+              <div className="flex justify-end space-x-4">
+                <button
+                  type="button"
+                  onClick={() => setView("list")}
+                  className="px-4 py-2 text-sm font-medium text-gray-700 rounded-md border border-gray-300 hover:bg-gray-50"
+                >
+                  Batal
+                </button>
+                <button
+                  type="submit"
+                  className="px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded-md hover:bg-indigo-700"
+                >
+                  Update Produk
+                </button>
+              </div>
+            </form>
+          </div>
+        )}
+      </main>
     </div>
   );
 }
