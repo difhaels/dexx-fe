@@ -2,21 +2,12 @@
 import Head from "next/head";
 import { useState } from "react";
 import {
-  FaHome,
-  FaBox,
-  FaShoppingBag,
   FaPlus,
   FaEdit,
   FaTrash,
   FaEyeSlash,
-  FaFileUpload,
-  FaDollarSign,
-  FaTag,
-  FaInfoCircle,
-  FaStar,
 } from "react-icons/fa";
-import Link from "next/link";
-import Sidebar from "../components/Sidebar";
+import Sidebar from "../../components/Sidebar";
 
 const formatRupiah = (number) => {
   return new Intl.NumberFormat("id-ID", {

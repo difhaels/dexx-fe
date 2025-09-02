@@ -3,14 +3,11 @@
 import Head from "next/head";
 import { useState } from "react";
 import {
-  FaHome,
   FaBox,
-  FaShoppingBag,
   FaWallet,
   FaChartBar,
 } from "react-icons/fa";
-import Link from "next/link";
-import Sidebar from "../components/Sidebar";
+import Sidebar from "../../components/Sidebar";
 
 // Data statis untuk contoh tampilan
 const dashboardData = {
