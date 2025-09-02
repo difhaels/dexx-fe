@@ -8,7 +8,7 @@ import Link from "next/link";
 
 export default function Sidebar({x}) {
   return (
-    <aside className="w-64 bg-gray-800 text-white p-6 min-h-screen">
+    <aside className="fixed w-64 bg-gray-800 text-white p-6 min-h-screen">
       <h2 className="text-3xl font-bold mb-8 text-green-400">
         Seller Dashboard
       </h2>

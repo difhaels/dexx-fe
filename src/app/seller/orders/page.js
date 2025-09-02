@@ -107,7 +107,7 @@ export default function SellerOrders() {
       <Sidebar x="orders"/>
 
       {/* Main Content */}
-      <main className="flex-1 p-8">
+      <main className="ml-64 flex-1 p-8">
         <header className="mb-8">
           <h1 className="text-4xl font-extrabold text-gray-900">Orders</h1>
           <p className="text-gray-600 mt-2">Kelola semua pesanan Anda di sini.</p>

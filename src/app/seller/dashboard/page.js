@@ -30,10 +30,10 @@ export default function SellerDashboard() {
       </Head>
 
       {/* Sidebar */}
-     <Sidebar x="home"/>
+      <Sidebar x="home"/>
 
       {/* Main Content */}
-      <main className="flex-1 p-8">
+      <main className="ml-64 flex-1 p-8">
         <header className="mb-8">
           <h1 className="text-4xl font-extrabold text-gray-900">
             Selamat Datang, Seller!

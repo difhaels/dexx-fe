@@ -58,7 +58,6 @@ const initialProducts = [
 ];
 
 export default function SellerProducts() {
-  const [activeSidebarTab] = useState("products");
   const [view, setView] = useState("list"); // 'list', 'add', 'edit'
   const [products, setProducts] = useState(initialProducts);
   const [currentProduct, setCurrentProduct] = useState(null);
@@ -117,7 +116,7 @@ export default function SellerProducts() {
       {/* Sidebar */}
       <Sidebar x="products" />
       {/* Main Content */}
-      <main className="flex-1 p-8">
+      <main className="ml-64 flex-1 p-8 ">
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-4xl font-extrabold text-gray-900">Products</h1>
           <button
