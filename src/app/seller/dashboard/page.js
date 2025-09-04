@@ -63,7 +63,7 @@ export default function SellerDashboard() {
 
             {/* Metriks */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="bg-white rounded-lg shadow p-6">
+              <div className="bg-white rounded-lg shadow p-6 transform transition-transform duration-200 hover:scale-105 cursor-pointer">
                 <div className="flex items-center mb-2">
                   <FaWallet className="text-3xl text-green-500 mr-4" />
                   <div>
@@ -78,7 +78,7 @@ export default function SellerDashboard() {
                 </p>
               </div>
 
-              <div className="bg-white rounded-lg shadow p-6">
+              <div className="bg-white rounded-lg shadow p-6 transform transition-transform duration-200 hover:scale-105 cursor-pointer">
                 <div className="flex items-center mb-2">
                   <FaChartBar className="text-3xl text-yellow-500 mr-4" />
                   <div>
@@ -95,7 +95,7 @@ export default function SellerDashboard() {
                 </p>
               </div>
 
-              <div className="bg-white rounded-lg shadow p-6">
+              <div className="bg-white rounded-lg shadow p-6 transform transition-transform duration-200 hover:scale-105 cursor-pointer">
                 <div className="flex items-center mb-2">
                   <FaBox className="text-3xl text-blue-500 mr-4" />
                   <div>
