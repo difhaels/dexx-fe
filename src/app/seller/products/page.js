@@ -114,7 +114,7 @@ export default function SellerProducts() {
       </Head>
 
       {/* Sidebar */}
-      <Sidebar x="products" />
+      <Sidebar x="products" edit={1}/>
       {/* Main Content */}
       <main className="ml-64 flex-1 p-8 ">
         <div className="flex justify-between items-center mb-8">

@@ -17,9 +17,6 @@ const dashboardData = {
   displayItems: 35,
 };
 
-// Data untuk filter waktu
-const timeFilters = ["Hari", "Minggu", "Bulan", "Tahun"];
-
 export default function SellerDashboard() {
   const [activeTab, setActiveTab] = useState("home");
   const [activeTimeFilter, setActiveTimeFilter] = useState("Bulan");
@@ -31,7 +28,7 @@ export default function SellerDashboard() {
       </Head>
 
       {/* Sidebar */}
-      <Sidebar x="home"/>
+      <Sidebar x="home" edit={1}/>
 
       {/* Main Content */}
       <main className="ml-64 flex-1 p-8">
@@ -45,23 +42,6 @@ export default function SellerDashboard() {
         {/* Dashboard Home Content */}
         {activeTab === "home" && (
           <div>
-            {/* Filter Waktu */}
-            <div className="flex space-x-2 mb-6">
-              {timeFilters.map((filter) => (
-                <button
-                  key={filter}
-                  className={`px-4 py-2 rounded-full font-medium text-sm transition-colors ${
-                    activeTimeFilter === filter
-                      ? "bg-blue-600 text-white"
-                      : "bg-gray-300 text-gray-700 hover:bg-gray-400"
-                  }`}
-                  onClick={() => setActiveTimeFilter(filter)}
-                >
-                  {filter}
-                </button>
-              ))}
-            </div>
-
             {/* Metriks */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="bg-white rounded-lg shadow p-6 transform transition-transform duration-200 hover:scale-105 cursor-pointer">

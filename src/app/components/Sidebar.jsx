@@ -2,7 +2,7 @@ import React from "react";
 import { FaHome, FaBox, FaShoppingBag, FaUserEdit } from "react-icons/fa";
 import Link from "next/link";
 
-export default function Sidebar({ x }) {
+export default function Sidebar({ x, edit }) {
   return (
     <aside className="fixed w-64 bg-gray-800 text-white p-6 min-h-screen flex flex-col justify-between">
       {/* Atas */}
@@ -54,17 +54,20 @@ export default function Sidebar({ x }) {
           </ul>
         </nav>
       </div>
-
-      {/* Bawah */}
-      <div className="mt-8">
-        <Link
-          href="/seller/profile/edit"
-          className="flex items-center justify-center bg-green-500 hover:bg-green-600 text-white py-3 px-4 rounded-lg transition-colors"
-        >
-          <FaUserEdit className="mr-2" />
-          <span className="font-semibold">Edit Profile</span>
-        </Link>
-      </div>
+      {/* Bawah */}{" "}
+      {edit ? (
+        <div className="mt-8">
+          <Link
+            href="/seller/profile/edit"
+            className="flex items-center justify-center bg-green-500 hover:bg-green-600 text-white py-3 px-4 rounded-lg transition-colors"
+          >
+            <FaUserEdit className="mr-2" />
+            <span className="font-semibold">Edit Profile</span>
+          </Link>
+        </div>
+      ) : (
+        ""
+      )}
     </aside>
   );
 }

@@ -104,7 +104,7 @@ export default function SellerOrders() {
       </Head>
 
       {/* Sidebar */}
-      <Sidebar x="orders"/>
+      <Sidebar x="orders" edit={1}/>
 
       {/* Main Content */}
       <main className="ml-64 flex-1 p-8">
