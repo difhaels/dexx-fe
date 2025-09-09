@@ -18,7 +18,7 @@ const products = [
     rating: 4.8,
     sellerRating: 4.9,
     image:
-      "https://images.tokopedia.net/img/cache/700/VqbcmM/2023/11/14/0d03708a-6b8a-40a2-aa7c-8e3b56360812.png",
+      "https://picsum.photos/300/200",
   },
   {
     id: 2,
@@ -28,7 +28,7 @@ const products = [
     rating: 4.5,
     sellerRating: 4.7,
     image:
-      "https://images.tokopedia.net/img/cache/700/VqbcmM/2023/10/25/74149629-68d1-4228-a400-08d27ffc2e3d.png",
+      "https://picsum.photos/300/200",
   },
   {
     id: 3,
@@ -38,7 +38,7 @@ const products = [
     rating: 5.0,
     sellerRating: 5.0,
     image:
-      "https://images.tokopedia.net/img/cache/700/VqbcmM/2022/10/26/663c78cf-487c-471a-b0d5-b043f11e9f1a.jpg",
+      "https://picsum.photos/300/200",
   },
   {
     id: 4,
@@ -48,7 +48,7 @@ const products = [
     rating: 4.6,
     sellerRating: 4.8,
     image:
-      "https://images.tokopedia.net/img/cache/700/VqbcmM/2023/1/18/d8a39c59-b9d9-43c3-b034-7756f7e44a04.jpg",
+      "https://picsum.photos/300/200",
   },
   {
     id: 5,
@@ -58,7 +58,7 @@ const products = [
     rating: 4.9,
     sellerRating: 4.9,
     image:
-      "https://images.tokopedia.net/img/cache/700/VqbcmM/2023/1/13/a207212f-653a-48d6-953a-b851acb93b58.jpg",
+      "https://picsum.photos/300/200",
   },
   {
     id: 6,
@@ -68,7 +68,7 @@ const products = [
     rating: 4.7,
     sellerRating: 4.6,
     image:
-      "https://images.tokopedia.net/img/cache/700/VqbcmM/2023/9/22/a9a4c0ac-9f24-42f7-873b-e85d46114849.jpg",
+      "https://picsum.photos/300/200",
   },
   {
     id: 7,
@@ -78,7 +78,7 @@ const products = [
     rating: 4.8,
     sellerRating: 4.9,
     image:
-      "https://images.tokopedia.net/img/cache/700/VqbcmM/2023/11/15/21f061e8-71e8-466d-ad02-e25f69042b36.jpg",
+      "https://picsum.photos/300/200",
   },
   {
     id: 8,
@@ -88,7 +88,7 @@ const products = [
     rating: 4.5,
     sellerRating: 4.7,
     image:
-      "https://images.tokopedia.net/img/cache/700/VqbcmM/2023/12/11/6e33f373-c159-4d83-9b19-f55a104033b0.jpg",
+      "https://picsum.photos/300/200",
   },
   {
     id: 9,
@@ -98,7 +98,7 @@ const products = [
     rating: 5.0,
     sellerRating: 5.0,
     image:
-      "https://images.tokopedia.net/img/cache/700/VqbcmM/2023/5/17/74169733-128a-41d6-8488-82627e909a15.jpg",
+      "https://picsum.photos/300/200",
   },
   {
     id: 10,
@@ -108,7 +108,7 @@ const products = [
     rating: 4.6,
     sellerRating: 4.8,
     image:
-      "https://images.tokopedia.net/img/cache/700/VqbcmM/2023/10/25/1109a93c-2c96-419b-b0b9-52643a13ae87.jpg",
+      "https://picsum.photos/300/200",
   },
 ];
 
