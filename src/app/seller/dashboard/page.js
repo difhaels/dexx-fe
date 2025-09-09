@@ -8,6 +8,7 @@ import {
   FaChartBar,
 } from "react-icons/fa";
 import Sidebar from "../../components/Sidebar";
+import Link from "next/link";
 
 // Data statis untuk contoh tampilan
 const dashboardData = {
@@ -95,7 +96,7 @@ export default function SellerDashboard() {
                 </p>
               </div>
 
-              <div className="bg-white rounded-lg shadow p-6 transform transition-transform duration-200 hover:scale-105 cursor-pointer">
+              <Link href="/seller/display" className="bg-white rounded-lg shadow p-6 transform transition-transform duration-200 hover:scale-105 cursor-pointer">
                 <div className="flex items-center mb-2">
                   <FaBox className="text-3xl text-blue-500 mr-4" />
                   <div>
@@ -108,7 +109,7 @@ export default function SellerDashboard() {
                 <p className="text-3xl font-extrabold text-gray-900 mt-4">
                   {dashboardData.displayItems}
                 </p>
-              </div>
+              </Link>
             </div>
           </div>
         )}
