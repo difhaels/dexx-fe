@@ -2,7 +2,7 @@
 import Head from 'next/head';
 import { useState } from 'react';
 import Link from 'next/link';
-import { FaHome, FaBox, FaShoppingBag, FaStar, FaMapMarkerAlt } from 'react-icons/fa';
+import { FaBox, FaEdit, FaTag, FaDollarSign } from 'react-icons/fa';
 import Sidebar from '@/app/components/Sidebar';
 
 // Data produk contoh, hanya yang berstatus "Active"
@@ -13,8 +13,7 @@ const activeProducts = [
     name: "Laptop Gaming ROG Strix",
     price: "Rp 25.000.000",
     stock: 10,
-    city: "Jakarta",
-    rating: 4.8,
+    category: "Elektronik",
   },
   {
     id: 2,
@@ -22,8 +21,7 @@ const activeProducts = [
     name: "Kemeja Katun Pria",
     price: "Rp 120.000",
     stock: 50,
-    city: "Surabaya",
-    rating: 5.0,
+    category: "Pakaian",
   },
   {
     id: 3,
@@ -31,8 +29,7 @@ const activeProducts = [
     name: "Sepatu Lari Sport",
     price: "Rp 450.000",
     stock: 20,
-    city: "Malang",
-    rating: 4.7,
+    category: "Olahraga",
   },
 ];
 
@@ -52,7 +49,7 @@ export default function SellerDisplayProducts() {
       <main className="flex-1 p-8 ml-64">
         <header className="mb-8">
           <h1 className="text-4xl font-extrabold text-gray-900">Produk Sedang Didisplay</h1>
-          <p className="text-gray-600 mt-2">Ini adalah produk yang saat ini ditampilkan di etalase toko Anda.</p>
+          <p className="text-gray-600 mt-2">Kelola produk yang saat ini tampil di etalase toko Anda.</p>
         </header>
 
         {/* Product Grid */}
@@ -61,22 +58,30 @@ export default function SellerDisplayProducts() {
             <div key={product.id} className="bg-white rounded-lg shadow-md overflow-hidden">
               <img src={product.image} alt={product.name} className="w-full h-40 object-cover" />
               <div className="p-4">
-                <h3 className="text-lg font-semibold text-gray-900 truncate">{product.name}</h3>
-                <p className="text-md font-bold text-indigo-600 my-1">{product.price}</p>
+                <h3 className="text-lg font-semibold text-gray-900 truncate mb-2">{product.name}</h3>
                 
-                <div className="text-sm text-gray-500 flex items-center mb-1">
-                  <FaBox className="mr-2 text-xs" />
-                  Stok: {product.stock}
+                <div className="flex flex-col space-y-2 text-sm text-gray-600">
+                  <div className="flex items-center">
+                    <FaDollarSign className="mr-2 text-gray-500" />
+                    <span className="font-semibold">{product.price}</span>
+                  </div>
+                  <div className="flex items-center">
+                    <FaBox className="mr-2 text-gray-500" />
+                    Stok: <span className="font-semibold ml-1">{product.stock}</span>
+                  </div>
+                  <div className="flex items-center">
+                    <FaTag className="mr-2 text-gray-500" />
+                    Kategori: <span className="font-semibold ml-1">{product.category}</span>
+                  </div>
                 </div>
 
-                <div className="text-sm text-gray-500 flex items-center mb-1">
-                  <FaMapMarkerAlt className="mr-2 text-xs" />
-                  Kota: {product.city}
-                </div>
-                
-                <div className="text-sm text-yellow-500 flex items-center">
-                  <FaStar className="mr-1" />
-                  <span>{product.rating}</span>
+                <div className="mt-4 pt-4 border-t flex justify-center">
+                  <Link href={`/seller/products/edit/${product.id}`}>
+                    <span className="flex items-center space-x-2 text-indigo-600 hover:text-indigo-800 transition">
+                      <FaEdit />
+                      <span>Edit Produk</span>
+                    </span>
+                  </Link>
                 </div>
               </div>
             </div>
