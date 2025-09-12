@@ -26,14 +26,20 @@ export default function Navbar() {
           {login ? (
             <div className="md:hidden flex space-x-4">
               <FaShoppingCart className="text-2xl text-gray-600" />
-              <FaShop className="text-2xl text-slate-600 cursor-pointer hover:text-[#698ABD] transition" />
+              <Link href="/seller/dashboard">
+                <FaShop className="text-2xl text-slate-600 cursor-pointer hover:text-[#698ABD] transition" />
+              </Link>
               <FaUser className="text-2xl text-slate-600 cursor-pointer hover:text-[#698ABD] transition" />
             </div>
           ) : (
             <div className="md:hidden flex space-x-2">
-            <button className="border-[#698ABD] border-3 text-sm px-2 rounded-lg flex justify-center items-center">Daftar</button>
-            <button className="bg-[#698ABD] text-white text-sm px-2 rounded-lg flex justify-center items-center">Masuk</button>
-          </div>
+              <button className="border-[#698ABD] border-3 text-sm px-2 rounded-lg flex justify-center items-center">
+                Daftar
+              </button>
+              <button className="bg-[#698ABD] text-white text-sm px-2 rounded-lg flex justify-center items-center">
+                Masuk
+              </button>
+            </div>
           )}
         </div>
 
@@ -49,13 +55,19 @@ export default function Navbar() {
         {login ? (
           <div className="hidden md:flex items-center space-x-6">
             <FaShoppingCart className="text-2xl text-slate-600 cursor-pointer hover:text-[#698ABD] transition" />
-            <FaShop className="text-2xl text-slate-600 cursor-pointer hover:text-[#698ABD] transition" />
+            <Link href="/seller/dashboard">
+              <FaShop className="text-2xl text-slate-600 cursor-pointer hover:text-[#698ABD] transition" />
+            </Link>
             <FaUser className="text-2xl text-slate-600 cursor-pointer hover:text-[#698ABD] transition" />
           </div>
         ) : (
           <div className="hidden md:flex space-x-2">
-            <button className="border-[#698ABD] border-3 px-2 py-1 rounded-lg flex justify-center items-center">Daftar</button>
-            <button className="bg-[#698ABD] text-white px-2 py-1 rounded-lg flex justify-center items-center">Masuk</button>
+            <button className="border-[#698ABD] border-3 px-2 py-1 rounded-lg flex justify-center items-center">
+              Daftar
+            </button>
+            <button className="bg-[#698ABD] text-white px-2 py-1 rounded-lg flex justify-center items-center">
+              Masuk
+            </button>
           </div>
         )}
       </div>
