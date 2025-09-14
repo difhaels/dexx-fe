@@ -72,7 +72,7 @@ export default function SoldProductsPage() {
           {soldProductsData.map((product) => (
             <div
               key={product.id}
-              className="bg-white rounded-lg shadow-md overflow-hidden"
+              className="bg-white rounded-lg shadow-md overflow-hidden transition duration-300 ease-in-out hover:scale-105"
             >
               <img
                 src={product.image}
@@ -109,7 +109,7 @@ export default function SoldProductsPage() {
                     <FaStar className="mr-2" />
                     <span className="font-semibold">{product.rating}</span>/5
                   </div>
-                  <Link href={`/seller/reviews/${product.id}`}>
+                  <Link href={`/seller/review`}>
                     <span className="relative inline-flex items-center space-x-2 text-sm font-semibold text-blue-600 hover:text-blue-800 transition">
                       <FaReply />
                       <span>Ulasan</span>
