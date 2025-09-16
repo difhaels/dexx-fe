@@ -128,7 +128,7 @@ export default function SellerOrders() {
               )}
             </span>
           </Link>
-          <Link href="/seller/orders/accepted">
+          <Link href="/seller/orders/accept">
             <span
               className={`relative flex items-center space-x-2 px-6 py-3 rounded-lg transition-colors font-semibold bg-green-600 text-white hover:bg-green-700`}
             >
