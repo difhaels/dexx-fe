@@ -1,7 +1,5 @@
 import Head from "next/head";
 import {
-  FaShoppingCart,
-  FaSearch,
   FaStar,
   FaMapMarkerAlt,
 } from "react-icons/fa";

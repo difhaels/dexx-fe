@@ -58,7 +58,9 @@ export default function Navbar() {
             <Link href="/seller/dashboard">
               <FaShop className="text-2xl text-slate-600 cursor-pointer hover:text-[#698ABD] transition" />
             </Link>
-            <FaUser className="text-2xl text-slate-600 cursor-pointer hover:text-[#698ABD] transition" />
+            <Link href="/user">
+              <FaUser className="text-2xl text-slate-600 cursor-pointer hover:text-[#698ABD] transition" />
+            </Link>
           </div>
         ) : (
           <div className="hidden md:flex space-x-2">
