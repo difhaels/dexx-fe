@@ -2,7 +2,7 @@
 import { useState } from "react";
 import Head from "next/head";
 // Import Link dari next/link untuk navigasi
-import Link from "next/link"; 
+import Link from "next/link";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -64,16 +64,11 @@ export default function LoginPage() {
             Login
           </button>
         </form>
-        
+
         {/* Tambahkan tombol pendaftaran di sini */}
         <div className="mt-4 text-center">
           <p className="text-sm text-gray-600">
-            Belum punya akun?{" "}
-            <Link href="/register" legacyBehavior>
-              <a className="font-medium text-indigo-600 hover:text-indigo-500">
-                Daftar di sini
-              </a>
-            </Link>
+            Belum punya akun? <Link href="/login/register">Daftar di sini</Link>
           </p>
         </div>
       </div>
