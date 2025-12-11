@@ -127,7 +127,7 @@ export default function UserProfile() {
               </h3>
               <div className="grid grid-cols-2 gap-4">
                 {/* Fitur Keranjang Belanja (No. 7) */}
-                <Link href="/cart">
+                <Link href="/user/cart">
                   <span className="flex flex-col items-center justify-center rounded-lg bg-purple-50 p-6 text-center shadow-md transition duration-300 hover:bg-purple-100 hover:shadow-lg">
                     {/* <FaShoppingCart className="h-8 w-8 text-purple-600" /> */}
                     <span className="text-3xl">🛒</span>
@@ -141,7 +141,7 @@ export default function UserProfile() {
                 </Link>
 
                 {/* Fitur Riwayat Pembelian Saya (No. 8) */}
-                <Link href="/history">
+                <Link href="/user/history">
                   <span className="flex flex-col items-center justify-center rounded-lg bg-blue-50 p-6 text-center shadow-md transition duration-300 hover:bg-blue-100 hover:shadow-lg">
                     {/* <FaHistory className="h-8 w-8 text-blue-600" /> */}
                     <span className="text-3xl">🧾</span>
