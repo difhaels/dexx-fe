@@ -3,142 +3,134 @@ import Head from 'next/head';
 import Sidebar from '@/app/components/Sidebar';
 import { useState, useMemo } from 'react';
 import Link from 'next/link';
-import { FaPlus, FaBox, FaShoppingBag, FaFilter, FaStar, FaTag, FaDollarSign } from 'react-icons/fa';
+import { FaPlus, FaBox, FaShoppingBag, FaFilter, FaEthereum, FaLink } from 'react-icons/fa';
 
-// Data produk statis dengan berbagai status
+// Data produk disesuaikan untuk Kolektor Diecast & Status Blockchain
 const allProducts = [
   {
     id: 1,
-    image: "https://images.tokopedia.net/img/cache/700/VqbcmM/2023/11/14/0d03708a-6b8a-40a2-aa7c-8e3b56360812.png",
-    name: "Laptop Gaming ROG Strix",
-    price: "25.000.000",
-    stock: 10,
-    status: "Aktif",
-    rating: 4.8,
+    image: "https://images.unsplash.com/photo-1594787318286-3d835c1d207f?q=80&w=400&h=300&fit=crop",
+    name: "Nissan Skyline GT-R R34 STH",
+    price: "0.12",
+    stock: 1,
+    status: "On-Chain",
   },
   {
     id: 2,
-    image: "https://images.tokopedia.net/img/cache/700/VqbcmM/2023/10/25/74149629-68d1-4228-a400-08d27ffc2e3d.png",
-    name: "Air Fryer Multifungsi",
-    price: "850.000",
+    image: "https://images.unsplash.com/photo-1581235720704-06d3acfcb36f?q=80&w=400&h=300&fit=crop",
+    name: "Honda Civic SiR EG6 Yellow",
+    price: "0.05",
     stock: 0,
-    status: "Stok Habis",
-    rating: 4.5,
+    status: "Sold Out",
   },
   {
     id: 3,
-    image: "https://images.tokopedia.net/img/cache/700/VqbcmM/2022/10/26/663c78cf-487c-471a-b0d5-b043f11e9f1a.jpg",
-    name: "Kemeja Katun Pria",
-    price: "120.000",
-    stock: 50,
-    status: "Aktif",
-    rating: 5.0,
+    image: "https://images.unsplash.com/photo-1532330393533-443990a51d10?q=80&w=400&h=300&fit=crop",
+    name: "Mercedes-Benz G-Class 6x6",
+    price: "0.08",
+    stock: 1,
+    status: "On-Chain",
   },
   {
     id: 4,
-    image: "https://images.tokopedia.net/img/cache/700/VqbcmM/2023/1/18/d8a39c59-b9d9-43c3-b034-7756f7e44a04.jpg",
-    name: "Buku Resep Masakan",
-    price: "65.000",
-    stock: 25,
+    image: "https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?q=80&w=400&h=300&fit=crop",
+    name: "Lancer Evolution III",
+    price: "0.07",
+    stock: 5,
     status: "Archived",
-    rating: 4.6,
   },
   {
     id: 5,
-    image: "https://images.tokopedia.net/img/cache/700/VqbcmM/2023/11/15/21f061e8-71e8-466d-ad02-e25f69042b36.jpg",
-    name: "Headset Gaming",
-    price: "650.000",
-    stock: 5,
-    status: "Menunggu",
-    rating: null,
+    image: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=400&h=300&fit=crop",
+    name: "Porsche 911 GT3 RS",
+    price: "0.15",
+    stock: 1,
+    status: "Pending Node",
   },
 ];
 
-const formatRupiah = (number) => {
-  return new Intl.NumberFormat("id-ID", {
-    style: "currency",
-    currency: "IDR",
-    minimumFractionDigits: 0,
-  }).format(Number(number.replace(/\./g, '')));
-};
-
 const getStatusClasses = (status) => {
   switch (status) {
-    case "Aktif":
-      return "bg-green-200 text-green-800";
-    case "Stok Habis":
-      return "bg-red-200 text-red-800";
+    case "On-Chain":
+      return "bg-green-500/10 text-green-400 border-green-500/20";
+    case "Sold Out":
+      return "bg-red-500/10 text-red-400 border-red-500/20";
     case "Archived":
-      return "bg-gray-200 text-gray-800";
-    case "Menunggu":
-      return "bg-yellow-200 text-yellow-800";
+      return "bg-slate-500/10 text-slate-400 border-slate-500/20";
+    case "Pending Node":
+      return "bg-[#FFB300]/10 text-[#FFB300] border-[#FFB300]/20";
     default:
-      return "";
+      return "bg-white/5 text-white border-white/10";
   }
 };
 
 export default function SellerProducts() {
-  const [activeSidebarTab] = useState("products");
   const [filter, setFilter] = useState("Semua");
 
   const filteredProducts = useMemo(() => {
-    if (filter === "Semua") {
-      return allProducts;
-    }
+    if (filter === "Semua") return allProducts;
     return allProducts.filter(product => product.status === filter);
   }, [filter]);
 
-  const filterOptions = ["Semua", "Aktif", "Stok Habis", "Archived", "Menunggu"];
+  const filterOptions = ["Semua", "On-Chain", "Sold Out", "Archived", "Pending Node"];
 
   return (
-    <div className="flex min-h-screen bg-gray-100">
+    <div className="flex min-h-screen bg-[#1A0533]">
       <Head>
-        <title>Products | Seller Dashboard</title>
+        <title>Inventory Hub | DiecastChain</title>
       </Head>
 
       <Sidebar x="products" edit={1}/>
 
-      <main className="flex-1 p-8 ml-64">
-        <header className="mb-8">
-          <h1 className="text-4xl font-extrabold text-gray-900">Products</h1>
-          <p className="text-gray-600 mt-2">Kelola semua produk yang Anda jual di sini.</p>
+      <main className="flex-1 p-10 ml-64 text-white">
+        <header className="mb-10 relative">
+          <div className="absolute -top-10 -right-10 h-64 w-64 rounded-full bg-[#E91E63] opacity-5 blur-[100px]"></div>
+          <h1 className="text-5xl font-black italic tracking-tighter uppercase">
+            Inventory <span className="text-[#FFB300]">Hub</span>
+          </h1>
+          <p className="text-slate-400 mt-2 text-sm italic border-l-2 border-[#E91E63] pl-3 uppercase tracking-wider">
+            Manajemen koleksi diecast Anda yang terdaftar di Distributed Ledger.
+          </p>
         </header>
 
-        {/* Top Navigation */}
-        <div className="flex flex-wrap items-center justify-between mb-8 space-y-4 md:space-y-0">
-          <h2 className="text-2xl font-bold text-gray-800">Daftar Produk</h2>
-          <div className="flex flex-wrap space-x-2">
+        {/* Top Navigation & Actions */}
+        <div className="flex flex-wrap items-center justify-between mb-10 gap-4">
+          <h2 className="text-2xl font-black italic uppercase tracking-tighter text-[#FFB300]">Collection List</h2>
+          <div className="flex flex-wrap gap-3">
             <Link href="/seller/products/add">
-              <span className="flex items-center space-x-2 px-6 py-3 bg-indigo-600 text-white rounded-lg font-semibold transition-colors hover:bg-indigo-700">
+              <span className="flex items-center space-x-2 px-6 py-3 bg-[#E91E63] text-white rounded-xl font-black uppercase text-[10px] tracking-[0.2em] transition-all hover:scale-105 shadow-lg shadow-[#E91E63]/20 cursor-pointer">
                 <FaPlus />
-                <span>Tambah Produk</span>
+                <span>New Listing</span>
               </span>
             </Link>
-            <Link href="/seller/sold-products">
-              <span className="flex items-center space-x-2 px-4 py-2 text-sm font-semibold text-gray-700 bg-white rounded-lg border border-gray-300 hover:bg-gray-100">
+            <Link href="/seller/products/sold">
+              <span className="flex items-center space-x-2 px-5 py-3 text-[10px] font-black uppercase tracking-[0.2em] text-slate-300 bg-white/5 rounded-xl border border-white/10 hover:bg-white/10 transition-all cursor-pointer">
                 <FaShoppingBag />
-                <span>Produk Terjual</span>
+                <span>Sold Items</span>
               </span>
             </Link>
-            <Link href="/seller/display-products">
-              <span className="flex items-center space-x-2 px-4 py-2 text-sm font-semibold text-gray-700 bg-white rounded-lg border border-gray-300 hover:bg-gray-100">
+            <Link href="/seller/products/display">
+              <span className="flex items-center space-x-2 px-5 py-3 text-[10px] font-black uppercase tracking-[0.2em] text-slate-300 bg-white/5 rounded-xl border border-white/10 hover:bg-white/10 transition-all cursor-pointer">
                 <FaBox />
-                <span>Produk di Display</span>
+                <span>Showcase</span>
               </span>
             </Link>
           </div>
         </div>
 
-        {/* Filter Menu */}
-        <div className="mb-6 flex flex-wrap items-center space-x-2">
-          <FaFilter className="text-gray-500 mr-1" />
-          <span className="text-sm font-medium text-gray-700">Filter:</span>
+        {/* Filter Bar */}
+        <div className="mb-8 flex flex-wrap items-center gap-3 bg-[#2D0B5A] p-4 rounded-2xl border border-white/5 shadow-inner">
+          <div className="flex items-center text-[#FFB300] font-black uppercase text-[10px] tracking-widest mr-4">
+            <FaFilter className="mr-2" /> Filter Hub:
+          </div>
           {filterOptions.map(option => (
             <button
               key={option}
               onClick={() => setFilter(option)}
-              className={`px-3 py-1 text-xs rounded-full font-semibold transition-colors ${
-                filter === option ? 'bg-blue-600 text-white' : 'bg-gray-300 text-gray-700 hover:bg-gray-400'
+              className={`px-4 py-1.5 text-[9px] rounded-full font-black uppercase tracking-widest transition-all border ${
+                filter === option 
+                ? 'bg-[#E91E63] text-white border-[#E91E63] shadow-lg shadow-[#E91E63]/20' 
+                : 'bg-[#1A0533] text-slate-400 border-white/5 hover:border-[#E91E63]/50'
               }`}
             >
               {option}
@@ -147,30 +139,42 @@ export default function SellerProducts() {
         </div>
 
         {/* Product Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
+        <div className="grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-6">
           {filteredProducts.length > 0 ? (
             filteredProducts.map((product) => (
               <Link key={product.id} href={`/seller/products/${product.id}`}>
-                <span className="bg-white rounded-lg shadow-md overflow-hidden transition-transform hover:scale-105">
-                  <img src={product.image} alt={product.name} className="w-full h-40 object-cover" />
+                <div className="group bg-[#2D0B5A] rounded-2xl border border-white/5 overflow-hidden transition-all hover:border-[#FFB300]/30 cursor-pointer relative">
+                  <div className="relative overflow-hidden aspect-[4/3]">
+                    <img src={product.image} alt={product.name} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                    <div className="absolute top-2 right-2 bg-[#1A0533]/60 backdrop-blur-sm p-1.5 rounded-lg border border-white/10">
+                        <FaLink className="text-[#FFB300] text-[10px]" />
+                    </div>
+                  </div>
+                  
                   <div className="p-4">
-                    <h3 className="text-lg font-semibold text-gray-900 truncate mb-1">{product.name}</h3>
-                    <p className="text-md font-bold text-indigo-600 mb-2">{formatRupiah(product.price)}</p>
-                    <div className="flex flex-col space-y-1 text-sm text-gray-600">
-                      <div className="flex items-center space-x-2">
-                        <FaBox className="text-xs text-gray-500" />
-                        <span>Stok: {product.stock}</span>
+                    <h3 className="text-[11px] font-black text-white italic uppercase tracking-tight truncate group-hover:text-[#FFB300] transition-colors mb-1">
+                        {product.name}
+                    </h3>
+                    <div className="flex items-center text-sm font-black text-[#FFB300] italic mb-3">
+                        <FaEthereum className="mr-1 text-[10px]" /> {product.price}
+                    </div>
+                    
+                    <div className="flex flex-col space-y-2">
+                      <div className="flex items-center justify-between text-[9px] font-bold text-slate-500 uppercase tracking-widest">
+                        <span>Stock: <span className="text-white">{product.stock}</span></span>
                       </div>
-                      <span className={`inline-block px-2 py-1 text-xs font-semibold rounded-full ${getStatusClasses(product.status)}`}>
+                      <span className={`text-center py-1 text-[8px] font-black uppercase tracking-[0.2em] rounded-md border ${getStatusClasses(product.status)}`}>
                         {product.status}
                       </span>
                     </div>
                   </div>
-                </span>
+                </div>
               </Link>
             ))
           ) : (
-            <p className="col-span-full text-center text-gray-500 mt-10">Tidak ada produk yang sesuai dengan filter.</p>
+            <div className="col-span-full text-center py-20 bg-[#2D0B5A] rounded-3xl border border-dashed border-white/10">
+              <p className="text-slate-500 font-bold uppercase tracking-widest text-sm italic">No diecast found in this block filter.</p>
+            </div>
           )}
         </div>
       </main>

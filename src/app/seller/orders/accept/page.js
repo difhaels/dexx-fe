@@ -4,51 +4,39 @@ import Sidebar from '@/app/components/Sidebar';
 import { useState, useMemo } from 'react';
 import { 
   FaBox, FaUser, FaCity, FaShippingFast, FaStickyNote, FaCommentDots, 
-  FaThumbtack, FaArrowCircleDown, FaCheck, FaBan, FaTruck
+  FaThumbtack, FaArrowCircleLeft, FaBan, FaLink
 } from 'react-icons/fa';
 import Link from 'next/link';
 
-// Data statis untuk simulasi orderan yang sudah diterima
+// Data disesuaikan dengan niche Diecast dan status Blockchain
 const initialAcceptedOrders = [
   {
     id: 1,
-    productName: 'Air Fryer Multifungsi',
-    buyerName: 'Fitriani Lestari',
+    productName: 'Hot Wheels Nissan Skyline GT-R R34 STH',
+    buyerName: 'Rian Kolektor',
     quantity: 1,
     destinationCity: 'Bekasi',
-    shippingService: 'JNE Reguler',
-    notes: 'Tolong lapisi kardusnya ya kak.',
+    shippingService: 'JNE YES (Asuransi)',
+    notes: 'Tolong pake double bubble wrap dan dus keras ya kak, card harus mulus.',
     isPinned: false,
-    status: 'Accepted'
+    txHash: '0x88A...e2b1'
   },
   {
     id: 2,
-    productName: 'Kemeja Katun Pria',
-    buyerName: 'Budi Santoso',
-    quantity: 3,
-    destinationCity: 'Jakarta Selatan',
-    shippingService: 'Gosend Instant',
-    notes: null,
-    isPinned: true, // Contoh orderan yang dipin
-    status: 'Accepted'
-  },
-  {
-    id: 3,
-    productName: 'Buku Resep Masakan',
-    buyerName: 'Dewi Wijaya',
+    productName: 'Tomica Limited Vintage Neo Honda Civic',
+    buyerName: 'Budi Diecast',
     quantity: 1,
-    destinationCity: 'Depok',
-    shippingService: 'JNE Express',
-    notes: 'Mohon segera diproses, terima kasih.',
-    isPinned: false,
-    status: 'Accepted'
+    destinationCity: 'Jakarta Selatan',
+    shippingService: 'Grab Instant',
+    notes: null,
+    isPinned: true,
+    txHash: '0x44C...f9d2'
   },
 ];
 
 export default function AcceptedOrdersPage() {
   const [orders, setOrders] = useState(initialAcceptedOrders);
 
-  // Mengurutkan pesanan: yang dipin di atas, sisanya di bawah
   const sortedOrders = useMemo(() => {
     return [...orders].sort((a, b) => (b.isPinned - a.isPinned));
   }, [orders]);
@@ -59,107 +47,134 @@ export default function AcceptedOrdersPage() {
     ));
   };
 
-  const handlePackingComplete = (id) => {
-    console.log(`Pesanan ID ${id} selesai dipacking.`);
-    alert('Pesanan berhasil dipacking!');
-    // Tambahkan logika untuk memperbarui status pesanan menjadi "Ready to Ship"
+  const handleUpdateShipping = (id) => {
+    alert(`Status Blockchain Terupdate: Pesanan ID #${id} masuk tahap pengiriman. Resi terikat ke Smart Contract.`);
   };
 
   const handleCancelOrder = (id) => {
-    console.log(`Pesanan ID ${id} dibatalkan.`);
-    if (window.confirm("Apakah Anda yakin ingin membatalkan pesanan ini?")) {
-        alert('Pesanan berhasil dibatalkan.');
-        // Tambahkan logika untuk menghapus pesanan dari daftar
+    if (window.confirm("Batalkan pesanan? Dana Escrow akan di-refund otomatis ke Buyer.")) {
+        alert('Transaksi dibatalkan. Smart Contract memicu Refund.');
     }
   };
 
   return (
-    <div className="flex min-h-screen bg-gray-100">
+    <div className="flex min-h-screen bg-[#1A0533]">
       <Head>
-        <title>Orderan Diterima | Seller Dashboard</title>
+        <title>Proses Order | DiecastChain</title>
       </Head>
 
-      <Sidebar />
+      <Sidebar x="orders" edit={1} />
 
-      <main className="flex-1 p-8 ml-64">
-        <header className="mb-8">
-          <h1 className="text-4xl font-extrabold text-gray-900">Orderan Diterima</h1>
-          <p className="text-gray-600 mt-2">Daftar pesanan yang sedang Anda proses.</p>
+      <main className="flex-1 p-10 ml-64 text-white">
+        <header className="mb-10 relative">
+          <div className="absolute -top-10 -right-10 h-64 w-64 rounded-full bg-[#E91E63] opacity-5 blur-[100px]"></div>
+          <h1 className="text-5xl font-black italic tracking-tighter uppercase">
+            Order <span className="text-[#FFB300]">Processing</span>
+          </h1>
+          <p className="text-slate-400 mt-2 text-sm italic border-l-2 border-[#E91E63] pl-3">
+            Daftar diecast yang sudah dibayar (Escrow Locked) dan siap dipacking.
+          </p>
         </header>
 
         <Link href="/seller/orders">
-          <span className="mb-6 flex items-center space-x-2 text-blue-600 hover:text-blue-800 transition-colors font-semibold">
-            <FaArrowCircleDown />
-            <span>Kembali ke Halaman Orders</span>
-          </span>
+          <div className="mb-8 inline-flex items-center space-x-2 text-[#FFB300] hover:text-white transition-colors font-bold uppercase text-xs tracking-widest cursor-pointer">
+            <FaArrowCircleLeft />
+            <span>Back to Orders Hub</span>
+          </div>
         </Link>
 
         {sortedOrders.length > 0 ? (
           <div className="space-y-6">
             {sortedOrders.map((order) => (
-              <div key={order.id} className="bg-white rounded-lg shadow-md p-6 relative">
+              <div key={order.id} className="bg-[#2D0B5A] rounded-3xl border border-white/5 p-8 relative overflow-hidden group">
+                
+                {/* Blockchain Info Overlay */}
+                <div className="absolute top-0 right-20 bg-[#E91E63]/10 px-4 py-1 rounded-b-xl border-x border-b border-[#E91E63]/20">
+                  <p className="text-[9px] font-mono text-[#E91E63] flex items-center tracking-tighter uppercase">
+                    <FaLink className="mr-1" /> TX: {order.txHash}
+                  </p>
+                </div>
+
                 {/* Pin Icon */}
                 <button
                   onClick={() => togglePin(order.id)}
-                  className={`absolute top-4 right-4 text-2xl transition-colors ${order.isPinned ? 'text-blue-500' : 'text-gray-300 hover:text-blue-400'}`}
-                  title={order.isPinned ? 'Lepas Pin' : 'Pin ke Atas'}
+                  className={`absolute top-4 right-6 text-xl transition-colors ${order.isPinned ? 'text-[#FFB300]' : 'text-slate-600 hover:text-[#FFB300]'}`}
                 >
-                  <FaThumbtack />
+                  <FaThumbtack className={order.isPinned ? 'rotate-45' : ''} />
                 </button>
 
-                <h3 className="text-xl font-bold text-gray-900 mb-4">{order.productName}</h3>
+                <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
+                    <h3 className="text-2xl font-black text-white italic uppercase tracking-tighter">
+                        {order.productName}
+                    </h3>
+                    <span className="mt-2 md:mt-0 px-3 py-1 bg-green-500/10 text-green-400 text-[10px] font-bold rounded-full border border-green-500/20 uppercase tracking-widest">
+                        Escrow Locked
+                    </span>
+                </div>
                 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-600">
-                  <div className="flex items-center space-x-3">
-                    <FaUser className="text-gray-400" />
-                    <span>Nama Pembeli: <span className="font-semibold">{order.buyerName}</span></span>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 text-sm">
+                  <div className="flex items-center space-x-3 text-slate-300">
+                    <FaUser className="text-[#E91E63]" />
+                    <div className="flex flex-col text-[11px] uppercase tracking-tighter">
+                        <span className="text-slate-500 font-bold">Buyer</span>
+                        <span className="font-black text-white">{order.buyerName}</span>
+                    </div>
                   </div>
-                  <div className="flex items-center space-x-3">
-                    <FaBox className="text-gray-400" />
-                    <span>Jumlah: <span className="font-semibold">{order.quantity}</span></span>
+                  <div className="flex items-center space-x-3 text-slate-300">
+                    <FaBox className="text-[#E91E63]" />
+                    <div className="flex flex-col text-[11px] uppercase tracking-tighter">
+                        <span className="text-slate-500 font-bold">Quantity</span>
+                        <span className="font-black text-white">{order.quantity} Pcs</span>
+                    </div>
                   </div>
-                  <div className="flex items-center space-x-3">
-                    <FaCity className="text-gray-400" />
-                    <span>Kota Tujuan: <span className="font-semibold">{order.destinationCity}</span></span>
+                  <div className="flex items-center space-x-3 text-slate-300">
+                    <FaCity className="text-[#E91E63]" />
+                    <div className="flex flex-col text-[11px] uppercase tracking-tighter">
+                        <span className="text-slate-500 font-bold">Destination</span>
+                        <span className="font-black text-white">{order.destinationCity}</span>
+                    </div>
                   </div>
-                  <div className="flex items-center space-x-3">
-                    <FaShippingFast className="text-gray-400" />
-                    <span>Jasa Kirim: <span className="font-semibold">{order.shippingService}</span></span>
+                  <div className="flex items-center space-x-3 text-slate-300">
+                    <FaShippingFast className="text-[#E91E63]" />
+                    <div className="flex flex-col text-[11px] uppercase tracking-tighter">
+                        <span className="text-slate-500 font-bold">Courier</span>
+                        <span className="font-black text-white">{order.shippingService}</span>
+                    </div>
                   </div>
                 </div>
 
                 {order.notes && (
-                  <div className="mt-4 p-4 rounded-md bg-gray-50 border border-gray-200">
-                    <div className="flex items-center space-x-2 text-gray-700 font-semibold mb-1">
+                  <div className="mt-6 p-4 rounded-xl bg-[#1A0533] border border-white/5 border-l-4 border-l-[#FFB300]">
+                    <div className="flex items-center space-x-2 text-[#FFB300] font-black uppercase text-[10px] tracking-widest mb-1">
                       <FaStickyNote />
-                      <span>Catatan Pembeli</span>
+                      <span>Kolektor's Note</span>
                     </div>
-                    <p className="text-sm text-gray-600 italic">{order.notes}</p>
+                    <p className="text-xs text-slate-300 italic">"{order.notes}"</p>
                   </div>
                 )}
                 
-                <div className="mt-6 border-t pt-4 flex items-center justify-between">
+                <div className="mt-8 border-t border-white/5 pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
                   <Link href={`/seller/chat/${order.buyerName}`}>
-                    <span className="flex items-center space-x-2 text-blue-600 hover:text-blue-800 transition-colors font-semibold">
+                    <span className="flex items-center space-x-2 text-slate-400 hover:text-[#FFB300] transition-colors font-bold uppercase text-[10px] tracking-widest cursor-pointer">
                       <FaCommentDots className="text-lg" />
-                      <span>Chat Pembeli</span>
+                      <span>Chat Collector</span>
                     </span>
                   </Link>
 
-                  <div className="flex space-x-3">
-                    <button 
-                      onClick={() => handlePackingComplete(order.id)}
-                      className="flex items-center space-x-2 px-4 py-2 rounded-md bg-green-600 text-white hover:bg-green-700 transition-colors"
-                    >
-                      <FaBox className="text-sm" />
-                      <span>Selesai Packing</span>
-                    </button>
+                  <div className="flex space-x-3 w-full md:w-auto">
                     <button 
                       onClick={() => handleCancelOrder(order.id)}
-                      className="flex items-center space-x-2 px-4 py-2 rounded-md bg-red-600 text-white hover:bg-red-700 transition-colors"
+                      className="flex-1 md:flex-none flex items-center justify-center space-x-2 px-6 py-3 rounded-xl border border-[#E91E63] text-[#E91E63] font-bold uppercase text-[10px] tracking-widest hover:bg-[#E91E63]/10 transition-all"
                     >
-                      <FaBan className="text-sm" />
-                      <span>Batalkan</span>
+                      <FaBan />
+                      <span>Cancel & Refund</span>
+                    </button>
+                    <button 
+                      onClick={() => handleUpdateShipping(order.id)}
+                      className="flex-1 md:flex-none flex items-center justify-center space-x-2 px-6 py-3 rounded-xl bg-[#E91E63] text-white font-bold uppercase text-[10px] tracking-widest hover:scale-105 shadow-lg shadow-[#E91E63]/20 transition-all"
+                    >
+                      <FaBox />
+                      <span>Packing & Ship</span>
                     </button>
                   </div>
                 </div>
@@ -167,8 +182,8 @@ export default function AcceptedOrdersPage() {
             ))}
           </div>
         ) : (
-          <div className="text-center py-10 text-gray-500">
-            <p>Tidak ada orderan yang sedang diproses.</p>
+          <div className="text-center py-20 bg-[#2D0B5A] rounded-3xl border border-dashed border-white/10">
+            <p className="text-slate-500 font-bold uppercase tracking-widest text-sm">Tidak ada orderan aktif di jaringan node ini.</p>
           </div>
         )}
       </main>

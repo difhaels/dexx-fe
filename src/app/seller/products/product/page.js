@@ -3,174 +3,165 @@ import Head from "next/head";
 import Sidebar from "@/app/components/Sidebar";
 import Link from "next/link";
 import {
-  FaBox,
-  FaTag,
-  FaDollarSign,
-  FaEdit,
-  FaArchive,
-  FaTrash,
-  FaStar,
-  FaReply,
-  FaArrowLeft,
-  FaExternalLinkAlt,
+  FaBox, FaTag, FaEdit, FaArchive, FaTrash, FaStar, FaReply, 
+  FaArrowLeft, FaEthereum, FaLink
 } from "react-icons/fa";
 
-// Data produk statis sebagai contoh
+// Data produk disesuaikan untuk Kolektor Diecast & Blockchain
 const productData = {
   id: 1,
-  image:
-    "https://images.tokopedia.net/img/cache/700/VqbcmM/2023/11/14/0d03708a-6b8a-40a2-aa7c-8e3b56360812.png",
-  name: "Laptop Gaming ROG Strix",
-  price: "25.000.000",
-  stock: 10,
-  status: "Aktif",
-  rating: 4.8,
-  reviewCount: 2,
+  image: "https://images.unsplash.com/photo-1594787318286-3d835c1d207f?q=80&w=600&h=400&fit=crop",
+  name: "Hot Wheels Nissan Skyline GT-R R34 (Super Treasure Hunt)",
+  price: "0.12",
+  stock: 1,
+  status: "Listed",
+  rating: 4.9,
+  reviewCount: 5,
+  contractAddress: "0x71C...a8f1"
 };
 
 const getStatusClasses = (status) => {
   switch (status) {
-    case "Aktif":
-      return "bg-green-200 text-green-800";
-    case "Stok Habis":
-      return "bg-red-200 text-red-800";
+    case "Listed":
+      return "bg-green-500/10 text-green-400 border-green-500/20";
+    case "Sold Out":
+      return "bg-red-500/10 text-red-400 border-red-500/20";
     case "Archived":
-      return "bg-gray-200 text-gray-800";
-    case "Menunggu":
-      return "bg-yellow-200 text-yellow-800";
+      return "bg-slate-500/10 text-slate-400 border-slate-500/20";
     default:
-      return "";
+      return "bg-white/5 text-white border-white/10";
   }
-};
-
-const formatRupiah = (number) => {
-  return new Intl.NumberFormat("id-ID", {
-    style: "currency",
-    currency: "IDR",
-    minimumFractionDigits: 0,
-  }).format(Number(number.replace(/\./g, "")));
 };
 
 export default function SellerProductDetailPage() {
   return (
-    <div className="flex min-h-screen bg-gray-100">
+    <div className="flex min-h-screen bg-[#1A0533]">
       <Head>
-        <title>{productData.name} | Seller Dashboard</title>
+        <title>{productData.name} | DiecastChain Admin</title>
       </Head>
 
-      <Sidebar />
+      <Sidebar x="products" edit={1} />
 
-      <main className="flex-1 p-8 ml-64">
-        <header className="mb-8 flex items-center justify-between">
-          <div>
-            <Link href="/seller/products">
-              <span className="flex items-center space-x-2 text-blue-600 hover:text-blue-800 transition-colors font-semibold mb-2">
-                <FaArrowLeft />
-                <span>Kembali ke Daftar Produk</span>
-              </span>
-            </Link>
-            <h1 className="text-4xl font-extrabold text-gray-900">
-              {productData.name}
-            </h1>
-          </div>
+      <main className="flex-1 p-10 ml-64 text-white">
+        <header className="mb-8 relative">
+          <Link href="/seller/products/display">
+            <span className="flex items-center space-x-2 text-[#FFB300] hover:text-white transition-colors font-black uppercase text-[10px] tracking-widest mb-4 cursor-pointer">
+              <FaArrowLeft />
+              <span>Back to Inventory</span>
+            </span>
+          </Link>
+          <h1 className="text-4xl font-black italic tracking-tighter uppercase">
+            Product <span className="text-[#E91E63]">Detail</span>
+          </h1>
         </header>
 
-        <div className="bg-white rounded-lg shadow-md p-6 flex flex-col md:flex-row items-center md:items-start space-y-6 md:space-y-0 md:space-x-8">
-          <div className="w-full md:w-1/3">
-            <img
-              src={productData.image}
-              alt={productData.name}
-              className="w-full rounded-lg object-cover"
-            />
+        <div className="bg-[#2D0B5A] rounded-3xl border border-white/5 p-8 flex flex-col lg:flex-row gap-12 shadow-2xl">
+          {/* Bagian Kiri: Image */}
+          <div className="w-full lg:w-2/5">
+            <div className="relative group overflow-hidden rounded-2xl border border-white/10">
+              <img
+                src={productData.image}
+                alt={productData.name}
+                className="w-full aspect-square object-cover transition-transform duration-700 group-hover:scale-110"
+              />
+              <div className="absolute top-4 right-4 bg-[#1A0533]/80 backdrop-blur-md p-3 rounded-xl border border-white/10">
+                <FaLink className="text-[#FFB300] text-sm" />
+              </div>
+            </div>
+            <p className="mt-4 text-center text-[10px] font-mono text-slate-500 uppercase tracking-widest">
+               On-Chain ID: {productData.contractAddress}
+            </p>
           </div>
 
-          <div className="w-full md:w-2/3 space-y-4">
-            <div className="flex flex-col space-y-1">
-              <span className="text-xl font-bold text-gray-900">
+          {/* Bagian Kanan: Info & Actions */}
+          <div className="w-full lg:w-3/5 space-y-6">
+            <div className="space-y-2">
+              <h2 className="text-3xl font-black italic uppercase tracking-tighter">
                 {productData.name}
-              </span>
-              <span className="text-3xl font-extrabold text-indigo-600">
-                {formatRupiah(productData.price)}
-              </span>
-            </div>
-
-            <div className="flex flex-col space-y-2 text-sm text-gray-600">
-              <div className="flex items-center space-x-2">
-                <FaBox className="text-gray-500" />
-                <span>
-                  Stok:{" "}
-                  <span className="font-semibold">{productData.stock}</span>
-                </span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <FaTag className="text-gray-500" />
-                <span>
-                  Status:
-                  <span
-                    className={`ml-2 px-2 py-1 text-xs font-semibold rounded-full ${getStatusClasses(
-                      productData.status
-                    )}`}
-                  >
-                    {productData.status}
-                  </span>
-                </span>
-              </div>
-              <div className="flex items-center space-x-2 text-yellow-500">
-                <FaStar />
-                <span className="font-semibold">{productData.rating}</span>/5
-                Rating
+              </h2>
+              <div className="flex items-center text-4xl font-black text-[#FFB300] italic">
+                <FaEthereum className="mr-2 text-2xl" />
+                <span>{productData.price} ETH</span>
               </div>
             </div>
 
-            <div className="border-t pt-4 space-y-4">
-              <h3 className="text-lg font-bold text-gray-800">
-                Manajemen Produk
+            <div className="grid grid-cols-2 gap-4">
+              <div className="bg-[#1A0533] p-4 rounded-2xl border border-white/5 flex flex-col">
+                <span className="text-[10px] font-bold text-slate-500 uppercase tracking-[0.2em] mb-1 flex items-center">
+                  <FaBox className="mr-2 text-[#E91E63]" /> Inventory Stock
+                </span>
+                <span className="text-xl font-black">{productData.stock} Units</span>
+              </div>
+              <div className="bg-[#1A0533] p-4 rounded-2xl border border-white/5 flex flex-col">
+                <span className="text-[10px] font-bold text-slate-500 uppercase tracking-[0.2em] mb-1 flex items-center">
+                  <FaTag className="mr-2 text-[#E91E63]" /> Listing Status
+                </span>
+                <span className={`text-sm font-black uppercase tracking-widest mt-1 px-3 py-0.5 rounded-full border inline-block w-fit ${getStatusClasses(productData.status)}`}>
+                  {productData.status}
+                </span>
+              </div>
+              <div className="bg-[#1A0533] p-4 rounded-2xl border border-white/5 flex flex-col col-span-2">
+                <span className="text-[10px] font-bold text-slate-500 uppercase tracking-[0.2em] mb-1 flex items-center">
+                  <FaStar className="mr-2 text-[#FFB300]" /> Collector Rating
+                </span>
+                <div className="flex items-center space-x-2">
+                    <span className="text-xl font-black">{productData.rating}</span>
+                    <span className="text-xs text-slate-500">/ 5.0 Rating based on {productData.reviewCount} Reviews</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Management Controls */}
+            <div className="pt-8 border-t border-white/5 space-y-6">
+              <h3 className="text-sm font-black uppercase tracking-[0.3em] text-[#E91E63]">
+                Smart Contract Management
               </h3>
 
-              <div className="flex flex-wrap items-center space-x-4">
-                {/* Update Stok (Tampilan Saja) */}
-                <div className="flex items-center space-x-2">
+              <div className="flex flex-wrap gap-4">
+                {/* Update Stock */}
+                <div className="flex items-center space-x-2 bg-[#1A0533] p-1.5 rounded-xl border border-white/10">
                   <input
                     type="number"
-                    defaultValue="0"
-                    className="w-20 px-2 py-1 rounded-md border border-gray-300 text-center"
+                    defaultValue="1"
+                    className="w-16 bg-transparent text-center font-black text-[#FFB300] outline-none"
                   />
-                  <button className="flex items-center space-x-2 px-4 py-2 rounded-lg bg-green-600 text-white font-semibold transition hover:bg-green-700">
+                  <button className="flex items-center space-x-2 px-6 py-2.5 rounded-lg bg-[#E91E63] text-white font-black uppercase text-[10px] tracking-widest transition hover:scale-105 shadow-lg shadow-[#E91E63]/20">
                     <FaBox />
-                    <span>Update Stok</span>
+                    <span>Update Block Stock</span>
                   </button>
                 </div>
 
-                {/* Edit Produk */}
+                {/* Edit & Reviews */}
                 <Link href={`/seller/products/edit/${productData.id}`}>
-                  <span className="flex items-center space-x-2 px-4 py-2 rounded-lg bg-indigo-600 text-white font-semibold transition hover:bg-indigo-700">
+                  <span className="flex items-center space-x-2 px-6 py-4 rounded-xl border-2 border-[#FFB300] text-[#FFB300] font-black uppercase text-[10px] tracking-widest transition hover:bg-[#FFB300] hover:text-[#1A0533] cursor-pointer">
                     <FaEdit />
-                    <span>Edit Produk</span>
+                    <span>Modify Listing</span>
                   </span>
                 </Link>
 
-                {/* Ulasan */}
                 <Link href={`/seller/review`}>
-                  <span className="relative flex items-center space-x-2 px-4 py-2 rounded-lg bg-blue-600 text-white font-semibold transition hover:bg-blue-700">
-                    <FaReply />
-                    <span>Ulasan</span>
+                  <span className="relative flex items-center space-x-2 px-6 py-4 rounded-xl bg-white/5 text-white font-black uppercase text-[10px] tracking-widest transition hover:bg-white/10 cursor-pointer">
+                    <FaReply className="text-[#FFB300]" />
+                    <span>Collector Reviews</span>
                     {productData.reviewCount > 0 && (
-                      <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
+                      <span className="absolute -top-2 -right-2 bg-[#E91E63] text-white text-[10px] font-black rounded-full h-5 w-5 flex items-center justify-center">
                         {productData.reviewCount}
                       </span>
                     )}
                   </span>
                 </Link>
 
-                {/* Hapus & Arsipkan */}
-                <button className="flex items-center space-x-2 px-4 py-2 rounded-lg border border-gray-300 text-gray-700 font-semibold hover:bg-gray-100 transition">
-                  <FaArchive />
-                  <span>Arsipkan</span>
-                </button>
-                <button className="flex items-center space-x-2 px-4 py-2 rounded-lg bg-red-600 text-white font-semibold hover:bg-red-700 transition">
-                  <FaTrash />
-                  <span>Hapus</span>
-                </button>
+                {/* Dangerous Actions */}
+                <div className="flex gap-4 w-full pt-4">
+                    <button className="flex-1 flex items-center justify-center space-x-2 px-6 py-4 rounded-xl border border-white/10 text-slate-500 font-black uppercase text-[10px] tracking-widest hover:text-white hover:border-white transition">
+                        <FaArchive />
+                        <span>Archive On-Chain</span>
+                    </button>
+                    <button className="flex-1 flex items-center justify-center space-x-2 px-6 py-4 rounded-xl bg-red-600/10 border border-red-600/30 text-red-500 font-black uppercase text-[10px] tracking-widest hover:bg-red-600 hover:text-white transition">
+                        <FaTrash />
+                        <span>Destroy Listing</span>
+                    </button>
+                </div>
               </div>
             </div>
           </div>
