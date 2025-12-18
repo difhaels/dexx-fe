@@ -82,7 +82,7 @@ export default function Sidebar({ x, edit }) {
       <div className="pt-6 border-t border-white/5">
         {edit ? (
           <Link
-            href="/seller/profile/edit"
+            href="/seller/profile"
             className="flex items-center justify-center bg-transparent border-2 border-[#FFB300] text-[#FFB300] py-3 px-4 rounded-xl transition-all hover:bg-[#FFB300] hover:text-[#1A0533] font-black uppercase text-xs tracking-tighter"
           >
             <FaUserEdit className="mr-2 text-lg" />

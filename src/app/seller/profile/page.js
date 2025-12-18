@@ -2,7 +2,15 @@
 import React from "react";
 import Head from "next/head";
 import Sidebar from "@/app/components/Sidebar";
-import { FaStore, FaMapMarkerAlt, FaImage, FaPhoneAlt, FaClock, FaSave, FaEthereum } from "react-icons/fa";
+import {
+  FaStore,
+  FaMapMarkerAlt,
+  FaImage,
+  FaPhoneAlt,
+  FaClock,
+  FaSave,
+  FaEthereum,
+} from "react-icons/fa";
 
 export default function EditSellerProfile() {
   return (
@@ -30,8 +38,9 @@ export default function EditSellerProfile() {
           <form className="space-y-6">
             {/* Wallet Address - Read Only Simulation */}
             <div>
-              <label className="block text-[10px] font-black uppercase tracking-[0.2em] text-[#FFB300] mb-2 flex items-center">
-                <FaEthereum className="mr-2" /> Linked Wallet Address (Permanent)
+              <label className=" text-[10px] font-black uppercase tracking-[0.2em] text-[#FFB300] mb-2 flex items-center">
+                <FaEthereum className="mr-2" /> Linked Wallet Address
+                (Permanent)
               </label>
               <input
                 type="text"
@@ -43,8 +52,9 @@ export default function EditSellerProfile() {
 
             {/* Nama Toko */}
             <div>
-              <label className="block text-[10px] font-black uppercase tracking-[0.2em] text-slate-300 mb-2 flex items-center">
-                <FaStore className="mr-2 text-[#E91E63]" /> Nama Toko / Collector Alias
+              <label className=" text-[10px] font-black uppercase tracking-[0.2em] text-slate-300 mb-2 flex items-center">
+                <FaStore className="mr-2 text-[#E91E63]" /> Nama Toko /
+                Collector Alias
               </label>
               <input
                 type="text"
@@ -55,7 +65,7 @@ export default function EditSellerProfile() {
 
             {/* Deskripsi Toko */}
             <div>
-              <label className="block text-[10px] font-black uppercase tracking-[0.2em] text-slate-300 mb-2 flex items-center">
+              <label className=" text-[10px] font-black uppercase tracking-[0.2em] text-slate-300 mb-2 flex items-center">
                 Deskripsi Bio Kolektor
               </label>
               <textarea
@@ -68,8 +78,9 @@ export default function EditSellerProfile() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* Alamat */}
               <div>
-                <label className="block text-[10px] font-black uppercase tracking-[0.2em] text-slate-300 mb-2 flex items-center">
-                  <FaMapMarkerAlt className="mr-2 text-[#E91E63]" /> Markas / Kota
+                <label className=" text-[10px] font-black uppercase tracking-[0.2em] text-slate-300 mb-2 flex items-center">
+                  <FaMapMarkerAlt className="mr-2 text-[#E91E63]" /> Markas /
+                  Kota
                 </label>
                 <input
                   type="text"
@@ -80,8 +91,9 @@ export default function EditSellerProfile() {
 
               {/* Kontak */}
               <div>
-                <label className="block text-[10px] font-black uppercase tracking-[0.2em] text-slate-300 mb-2 flex items-center">
-                  <FaPhoneAlt className="mr-2 text-[#E91E63]" /> Kontak Telegram/WA
+                <label className=" text-[10px] font-black uppercase tracking-[0.2em] text-slate-300 mb-2 flex items-center">
+                  <FaPhoneAlt className="mr-2 text-[#E91E63]" /> Kontak
+                  Telegram/WA
                 </label>
                 <input
                   type="text"
@@ -94,7 +106,7 @@ export default function EditSellerProfile() {
             {/* Media Upload */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label className="block text-[10px] font-black uppercase tracking-[0.2em] text-slate-300 mb-2 flex items-center">
+                <label className=" text-[10px] font-black uppercase tracking-[0.2em] text-slate-300 mb-2 flex items-center">
                   <FaImage className="mr-2 text-[#FFB300]" /> Node Avatar (Logo)
                 </label>
                 <input
@@ -104,7 +116,7 @@ export default function EditSellerProfile() {
                 />
               </div>
               <div>
-                <label className="block text-[10px] font-black uppercase tracking-[0.2em] text-slate-300 mb-2 flex items-center">
+                <label className=" text-[10px] font-black uppercase tracking-[0.2em] text-slate-300 mb-2 flex items-center">
                   <FaImage className="mr-2 text-[#FFB300]" /> Store Banner
                 </label>
                 <input
@@ -117,7 +129,7 @@ export default function EditSellerProfile() {
 
             {/* Jam Operasional */}
             <div>
-              <label className="block text-[10px] font-black uppercase tracking-[0.2em] text-slate-300 mb-2 flex items-center">
+              <label className=" text-[10px] font-black uppercase tracking-[0.2em] text-slate-300 mb-2 flex items-center">
                 <FaClock className="mr-2 text-[#E91E63]" /> Jam Aktif Node
               </label>
               <input
