@@ -38,7 +38,7 @@ export default function WelcomePage() {
         {/* Tombol Navigasi Utama */}
         <div className="flex flex-col space-y-4 sm:flex-row sm:space-y-0 sm:space-x-6">
           <Link 
-            href="/market" 
+            href="/home" 
             className="group relative flex items-center justify-center overflow-hidden rounded-xl bg-[#E91E63] px-12 py-4 font-black uppercase tracking-wider text-white transition-all hover:scale-105 hover:bg-[#D81B60] hover:shadow-[0_0_20px_rgba(233,30,99,0.4)]"
           >
             <span>Jelajahi Market</span>
