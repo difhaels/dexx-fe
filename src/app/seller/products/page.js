@@ -84,7 +84,6 @@ export default function SellerProducts() {
 
       <main className="flex-1 p-10 ml-64 text-white">
         <header className="mb-10 relative">
-          <div className="absolute -top-10 -right-10 h-64 w-64 rounded-full bg-[#E91E63] opacity-5 blur-[100px]"></div>
           <h1 className="text-5xl font-black italic tracking-tighter uppercase">
             Inventory <span className="text-[#FFB300]">Hub</span>
           </h1>
