@@ -96,7 +96,7 @@ export default function SellerProducts() {
         <div className="flex flex-wrap items-center justify-between mb-10 gap-4">
           <h2 className="text-2xl font-black italic uppercase tracking-tighter text-[#FFB300]">Collection List</h2>
           <div className="flex flex-wrap gap-3">
-            <Link href="/seller/products/add">
+            <Link href="/seller/products/listing">
               <span className="flex items-center space-x-2 px-6 py-3 bg-[#E91E63] text-white rounded-xl font-black uppercase text-[10px] tracking-[0.2em] transition-all hover:scale-105 shadow-lg shadow-[#E91E63]/20 cursor-pointer">
                 <FaPlus />
                 <span>New Listing</span>
