@@ -1,6 +1,7 @@
 "use client";
 import Head from "next/head";
-import { FaStar, FaPen, FaEthereum, FaMapMarkerAlt } from "react-icons/fa";
+import { FaStar, FaEthereum, FaMapMarkerAlt } from "react-icons/fa";
+import { FaShop } from "react-icons/fa6";
 import Navbar from "../components/Navbar";
 import Link from "next/link";
 
@@ -86,13 +87,9 @@ export default function ProductsPage() {
           {/* Filter Bar Sederhana */}
           <div className="flex gap-2">
             <select className="bg-[#2D0B5A] border border-[#E91E63]/30 rounded-lg px-3 py-2 text-xs outline-none focus:border-[#E91E63]">
-              <option>Semua Brand</option>
+              <option>Category</option>
               <option>Hot Wheels</option>
               <option>Tomica</option>
-            </select>
-            <select className="bg-[#2D0B5A] border border-[#E91E63]/30 rounded-lg px-3 py-2 text-xs outline-none focus:border-[#E91E63]">
-              <option>Skala 1:64</option>
-              <option>Skala 1:43</option>
             </select>
           </div>
         </div>
@@ -138,8 +135,8 @@ export default function ProductsPage() {
                       <FaStar className="mr-1" />
                       <span className="font-bold">{product.rating}</span>
                     </div>
-                    <div className="text-[10px] text-slate-500 uppercase font-bold tracking-tighter">
-                      Seller:{" "}
+                    <div className="text-xs text-slate-500 uppercase font-bold tracking-tighter flex justify-center items-center">
+                      <FaShop className="mr-2 text-[#E91E63]"/>
                       <span className="text-slate-300">
                         {product.sellerRating}
                       </span>
