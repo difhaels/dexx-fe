@@ -55,7 +55,7 @@ export default function Navbar() {
         {/* Desktop Menu Icons */}
         {login ? (
           <div className="hidden md:flex items-center space-x-8">
-            <Link href="/cart" className="group flex flex-col items-center text-slate-300 hover:text-[#E91E63] transition">
+            <Link href="/user/cart" className="group flex flex-col items-center text-slate-300 hover:text-[#E91E63] transition">
               <FaShoppingCart className="text-xl" />
               <span className="text-[10px] mt-1 font-bold uppercase tracking-tighter">Keranjang</span>
             </Link>

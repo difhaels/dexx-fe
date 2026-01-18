@@ -61,7 +61,7 @@ export default function CartPage() {
       <div className="absolute top-0 left-0 h-96 w-96 rounded-full bg-[#E91E63] opacity-5 blur-[120px]"></div>
 
       <div className="mx-auto max-w-6xl relative z-10">
-        <Link href="/market">
+        <Link href="/home">
           <div className="mb-8 inline-flex items-center text-[#FFB300] font-black uppercase text-[10px] tracking-widest hover:text-white transition-colors cursor-pointer">
             <FaArrowLeft className="mr-2" /> Continue Collecting
           </div>

@@ -15,6 +15,8 @@ import {
   FaFire,
   FaInfoCircle,
   FaLink,
+  FaClock,
+  FaShoppingCart,
 } from "react-icons/fa";
 
 export default function BuyerProductDetailPage() {
@@ -120,12 +122,23 @@ export default function BuyerProductDetailPage() {
           {/* Kolom Kanan: Price & Logic */}
           <div className="w-full lg:w-1/2 flex flex-col justify-between">
             <div className="space-y-6">
-              <div className="space-y-2">
-                <h1 className="text-5xl font-black italic uppercase tracking-tighter leading-none">
-                  {product.name}
-                </h1>
-                <p className="text-[#E91E63] text-[10px] font-black uppercase tracking-[0.4em]">
-                  Verified Collectible Asset
+              <div className="flex justify-between items-start">
+                <div className="space-y-2">
+                  <h1 className="text-5xl font-black italic uppercase tracking-tighter leading-none">
+                    {product.name}
+                  </h1>
+                  <p className="text-[#E91E63] text-[10px] font-black uppercase tracking-[0.4em]">
+                    Verified Collectible Asset
+                  </p>
+                </div>
+              </div>
+              {/* INFO TANGGAL LISTING */}
+              <div className="text-left">
+                <p className="text-[8px] text-slate-500 uppercase font-black tracking-widest flex items-center ">
+                  <FaClock className="mr-1 text-[#FFB300]" /> Minted Date
+                </p>
+                <p className="text-[10px] font-mono text-white mt-1">
+                  18 Jan 2026
                 </p>
               </div>
 
@@ -155,52 +168,63 @@ export default function BuyerProductDetailPage() {
               </div>
             </div>
 
-            {/* BLOCKCHAIN INTERACTION CARD */}
-            <div className="mt-10 p-8 rounded-[32px] bg-[#1A0533] border border-[#FFB300]/20 relative overflow-hidden shadow-inner">
-              <div className="absolute top-0 right-0 p-4 opacity-10 text-7xl -mr-4 -mt-4">
-                <FaShieldAlt />
+            {/* BLOCKCHAIN INTERACTION AREA */}
+            <div className="mt-10 space-y-4">
+              <div className="rounded-[32px] bg-[#1A0533] border border-[#FFB300]/20 p-8 relative overflow-hidden shadow-inner">
+                <div className="absolute top-0 right-0 p-4 opacity-10 text-7xl -mr-4 -mt-4">
+                  <FaShieldAlt />
+                </div>
+
+                {transactionStep === 0 && (
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {/* TOMBOL ADD TO CART */}
+                    <button className="flex items-center justify-center space-x-3 bg-transparent border-2 border-[#E91E63] text-[#E91E63] py-5 rounded-2xl font-black uppercase italic text-xs tracking-[0.2em] hover:bg-[#E91E63] hover:text-white transition-all group">
+                      <FaShoppingCart className="group-hover:animate-bounce" />
+                      <span>Add to Cart</span>
+                    </button>
+
+                    {/* TOMBOL BUY NOW */}
+                    <button
+                      onClick={() => setTransactionStep(1)}
+                      className="flex items-center justify-center space-x-3 bg-[#E91E63] hover:bg-[#ff2e76] text-white py-5 rounded-2xl font-black uppercase italic text-xs tracking-[0.2em] transition transform hover:scale-[1.02] shadow-xl shadow-[#E91E63]/20"
+                    >
+                      <FaEthereum /> <span>Purchase Now</span>
+                    </button>
+                  </div>
+                )}
+
+                {transactionStep === 1 && (
+                  <div className="space-y-4 text-center">
+                    <div className="flex items-center justify-center text-blue-400 mb-4 animate-pulse">
+                      <FaTruck className="mr-3 text-2xl" />
+                      <span className="font-black uppercase italic text-sm tracking-widest">
+                        Funds Locked in Escrow...
+                      </span>
+                    </div>
+                    <button
+                      onClick={() => setTransactionStep(2)}
+                      className="w-full py-5 rounded-2xl bg-[#00C853] hover:bg-[#00E676] text-white font-black uppercase italic tracking-widest transition shadow-xl shadow-[#00C853]/20 flex items-center justify-center space-x-3"
+                    >
+                      <FaCheckCircle />{" "}
+                      <span>Confirm Received & Release Fund</span>
+                    </button>
+                  </div>
+                )}
+
+                {transactionStep === 2 && (
+                  <div className="text-center py-2">
+                    <div className="bg-green-500/20 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 border border-green-500/40">
+                      <FaCheckCircle className="text-[#00C853] text-3xl" />
+                    </div>
+                    <p className="font-black uppercase text-[#00C853] tracking-widest italic">
+                      Transaction Finalized
+                    </p>
+                    <p className="text-[10px] text-slate-500 mt-2 font-mono">
+                      On-Chain ID: {product.specs.onChainId}
+                    </p>
+                  </div>
+                )}
               </div>
-
-              {transactionStep === 0 && (
-                <button
-                  onClick={() => setTransactionStep(1)}
-                  className="w-full py-5 rounded-2xl bg-[#E91E63] hover:bg-[#ff2e76] text-white font-black uppercase italic tracking-widest transition transform hover:scale-[1.02] shadow-xl shadow-[#E91E63]/20 flex items-center justify-center space-x-3"
-                >
-                  <FaEthereum /> <span>Execute Smart Contract Purchase</span>
-                </button>
-              )}
-
-              {transactionStep === 1 && (
-                <div className="space-y-4">
-                  <div className="flex items-center justify-center text-blue-400 mb-4 animate-pulse">
-                    <FaTruck className="mr-3 text-2xl" />
-                    <span className="font-black uppercase italic text-sm tracking-widest">
-                      Funds Locked in Escrow...
-                    </span>
-                  </div>
-                  <button
-                    onClick={() => setTransactionStep(2)}
-                    className="w-full py-5 rounded-2xl bg-[#00C853] hover:bg-[#00E676] text-white font-black uppercase italic tracking-widest transition shadow-xl shadow-[#00C853]/20 flex items-center justify-center space-x-3"
-                  >
-                    <FaCheckCircle />{" "}
-                    <span>Confirm Received & Release Fund</span>
-                  </button>
-                </div>
-              )}
-
-              {transactionStep === 2 && (
-                <div className="text-center py-2">
-                  <div className="bg-green-500/20 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 border border-green-500/40">
-                    <FaCheckCircle className="text-[#00C853] text-3xl" />
-                  </div>
-                  <p className="font-black uppercase text-[#00C853] tracking-widest italic">
-                    Transaction Finalized
-                  </p>
-                  <p className="text-[10px] text-slate-500 mt-2">
-                    Ownership Hash: {product.specs.onChainId}
-                  </p>
-                </div>
-              )}
             </div>
           </div>
         </div>
@@ -263,7 +287,8 @@ export default function BuyerProductDetailPage() {
             </div>
             <div className="pt-3">
               <h3 className="text-xl font-black uppercase italic mb-6 flex items-center text-[#E91E63]">
-                <FaStar className="mr-3 text-sm" /> Review other products from this store
+                <FaStar className="mr-3 text-sm" /> Review other products from
+                this store
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {product.reviews.map((rev, i) => (
