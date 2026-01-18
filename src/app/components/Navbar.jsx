@@ -57,15 +57,15 @@ export default function Navbar() {
           <div className="hidden md:flex items-center space-x-8">
             <Link href="/cart" className="group flex flex-col items-center text-slate-300 hover:text-[#E91E63] transition">
               <FaShoppingCart className="text-xl" />
-              <span className="text-[10px] mt-1 font-bold uppercase tracking-tighter">Cart</span>
+              <span className="text-[10px] mt-1 font-bold uppercase tracking-tighter">Keranjang</span>
             </Link>
-            <Link href="/listing" className="group flex flex-col items-center text-slate-300 hover:text-[#FFB300] transition">
+            <Link href="/user/listing" className="group flex flex-col items-center text-slate-300 hover:text-[#FFB300] transition">
               <FaPen className="text-xl" />
               <span className="text-[10px] mt-1 font-bold uppercase tracking-tighter">Listing</span>
             </Link>
             <Link href="/user" className="group flex flex-col items-center text-slate-300 hover:text-[#FFB300] transition">
               <FaUser className="text-xl" />
-              <span className="text-[10px] mt-1 font-bold uppercase tracking-tighter">Profile</span>
+              <span className="text-[10px] mt-1 font-bold uppercase tracking-tighter">Profil</span>
             </Link>
           </div>
         ) : (
