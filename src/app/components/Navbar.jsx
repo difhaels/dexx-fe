@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
-import { FaShoppingCart, FaSearch, FaUser } from "react-icons/fa";
-import { FaShop } from "react-icons/fa6";
+import { FaShoppingCart, FaSearch, FaUser, FaPen } from "react-icons/fa";
 import Link from "next/link";
 
 export default function Navbar() {
@@ -31,7 +30,7 @@ export default function Navbar() {
           {login ? (
             <div className="md:hidden flex space-x-5 text-[#FFB300]">
               <Link href="/cart"><FaShoppingCart className="text-xl hover:text-[#E91E63]" /></Link>
-              <Link href="/seller/dashboard"><FaShop className="text-xl hover:text-[#E91E63]" /></Link>
+              <Link href="/listing"><FaPen className="text-xl hover:text-[#E91E63]" /></Link>
               <Link href="/user"><FaUser className="text-xl hover:text-[#E91E63]" /></Link>
             </div>
           ) : (
@@ -60,9 +59,9 @@ export default function Navbar() {
               <FaShoppingCart className="text-xl" />
               <span className="text-[10px] mt-1 font-bold uppercase tracking-tighter">Cart</span>
             </Link>
-            <Link href="/seller/dashboard" className="group flex flex-col items-center text-slate-300 hover:text-[#FFB300] transition">
-              <FaShop className="text-xl" />
-              <span className="text-[10px] mt-1 font-bold uppercase tracking-tighter">Seller</span>
+            <Link href="/listing" className="group flex flex-col items-center text-slate-300 hover:text-[#FFB300] transition">
+              <FaPen className="text-xl" />
+              <span className="text-[10px] mt-1 font-bold uppercase tracking-tighter">Listing</span>
             </Link>
             <Link href="/user" className="group flex flex-col items-center text-slate-300 hover:text-[#FFB300] transition">
               <FaUser className="text-xl" />

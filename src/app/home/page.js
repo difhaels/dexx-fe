@@ -1,6 +1,6 @@
 "use client";
 import Head from "next/head";
-import { FaStar, FaMapMarkerAlt, FaEthereum } from "react-icons/fa";
+import { FaStar, FaPen, FaEthereum, FaMapMarkerAlt } from "react-icons/fa";
 import Navbar from "../components/Navbar";
 import Link from "next/link";
 
