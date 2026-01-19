@@ -15,8 +15,7 @@ const products = [
     condition: "Mint in Card",
     rating: 4.9,
     sellerRating: 4.9,
-    image:
-      "https://images.unsplash.com/photo-1594787318286-3d835c1d207f?q=80&w=300&h=200&fit=crop",
+    image: "/images/hot1.jpg",
   },
   {
     id: 2,
@@ -26,8 +25,7 @@ const products = [
     condition: "Loose Like New",
     rating: 4.8,
     sellerRating: 4.7,
-    image:
-      "https://images.unsplash.com/photo-1581235720704-06d3acfcb36f?q=80&w=300&h=200&fit=crop",
+    image: "/images/hot2.jpg",
   },
   {
     id: 3,
@@ -37,8 +35,7 @@ const products = [
     condition: "Damaged Card",
     rating: 4.5,
     sellerRating: 5.0,
-    image:
-      "https://images.unsplash.com/photo-1532330393533-443990a51d10?q=80&w=300&h=200&fit=crop",
+    image: "/images/hot3.jpg",
   },
   {
     id: 4,
@@ -48,8 +45,7 @@ const products = [
     condition: "Mint in Box",
     rating: 5.0,
     sellerRating: 4.8,
-    image:
-      "https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?q=80&w=300&h=200&fit=crop",
+    image: "/images/hot4.jpg",
   },
   {
     id: 5,
@@ -59,8 +55,7 @@ const products = [
     condition: "Protector Case Included",
     rating: 4.9,
     sellerRating: 4.9,
-    image:
-      "https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=300&h=200&fit=crop",
+    image: "/images/hot5.jpg",
   },
 ];
 
@@ -136,7 +131,7 @@ export default function ProductsPage() {
                       <span className="font-bold">{product.rating}</span>
                     </div>
                     <div className="text-xs text-slate-500 uppercase font-bold tracking-tighter flex justify-center items-center">
-                      <FaShop className="mr-2 text-[#E91E63]"/>
+                      <FaShop className="mr-2 text-[#E91E63]" />
                       <span className="text-slate-300">
                         {product.sellerRating}
                       </span>
